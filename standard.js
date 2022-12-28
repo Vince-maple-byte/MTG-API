@@ -14,7 +14,8 @@ async function start(){
     let deckArchtypes = await page.evaluate( () => {
         const results = [];
         const mainUrl = 'https://www.mtgtop8.com/';
-        const item = document.querySelectorAll('div.S14 > a[href] ');
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
         item.forEach(element => {
             results.push({
                 deckName:  element.textContent, //Saves the deck archetype name 
@@ -23,7 +24,7 @@ async function start(){
         });
         return results;
     });
-
+    console.log(deckArchtypes);
     /*
     Tried to extract the deck popularity might do that later on.
     let deckPopularity = await page.evaluate( () => {
@@ -38,10 +39,15 @@ async function start(){
         return list;
     });
     */
-    await console.log(deckArchtypes);
-    //await console.log(deckPopularity);
+
+    // Next step click each deckArchetype and save the first link of the deck shown
+    
+    // Next step save all of the cards in the deck and make a new final json object with the deckName, cards, and the deck Url (the one that shows all of the cards)
 
     await browser.close();
+    //await console.log(deckPopularity);
+
+    
 }
 
 start();

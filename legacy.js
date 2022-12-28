@@ -13,7 +13,7 @@ async function start(){
     let deckArchtypes = await page.evaluate( () => {
         const results = [];
         const mainUrl = 'https://www.mtgtop8.com/';
-        const item = document.querySelectorAll('div.S14 > a[href] ');
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
         item.forEach(element => {
             results.push({
                 deckName:  element.textContent, //Saves the deck archetype name 
