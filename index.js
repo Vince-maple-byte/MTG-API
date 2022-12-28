@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const puppeteer = require('puppeteer');
-const fs = require('fs/promises');
-const { arrayBuffer } = require('stream/consumers');
+
 
 let cardJson = new Object();
 async function start(){

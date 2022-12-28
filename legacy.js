@@ -23,6 +23,41 @@ async function start(){
         return results;
     });
 
+    // Next step click each deckArchetype and save the first link of the deck shown
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype
+    let oneDeckUrl = [];
+    for (let index = 0; index < decksUrl.length; index++) {
+        oneDeckUrl[index] = decksUrl[index][0];
+        
+    }
+    console.log(oneDeckUrl);
+
     /*
     Tried to extract the deck popularity might do that later on.
     let deckPopularity = await page.evaluate( () => {
