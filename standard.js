@@ -24,15 +24,16 @@ async function start(){
         });
         return results;
     });
-    console.log(deckArchtypes[0].url);
-    let deckArchetypeUrl = []
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = [];
     for (let index = 0; index < deckArchtypes.length; index++) {
         deckArchetypeUrl.push(deckArchtypes[index].url);
         
     }
 
     //This solves the issue of getting the links to each individual deck
-    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    //Might only do one deck for each archetype since this is kind of overkill and could run into issues with server timing in the future.
     let decksUrl = [];
     for (let i = 0; i < deckArchetypeUrl.length; i++) {
         const url = deckArchetypeUrl[i];
@@ -51,36 +52,48 @@ async function start(){
         })
     }
     
-    //This creates only one deck link for each deck archetype
-    let oneDeckUrl = [];
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
     for (let index = 0; index < decksUrl.length; index++) {
-        oneDeckUrl[index] = decksUrl[index][0];
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
         
     }
-    console.log(oneDeckUrl);
-    /*
-    Tried to extract the deck popularity might do that later on.
-    let deckPopularity = await page.evaluate( () => {
-        const list = [];
-        const items = document.querySelectorAll('');
-        items.forEach(element => {
-            list.push({
-                //deckName:  element.getElementsByTagName('a').href,
-                text: element.textContent
-            });
-        });
-        return list;
-    });
-    */
 
-    // Next step click each deckArchetype and save the first link of the deck shown
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
     
-    // Next step save all of the cards in the deck and make a new final json object with the deckName, cards, and the deck Url (the one that shows all of the cards)
+    console.log(finalDeck);
 
     await browser.close();
-    //await console.log(deckPopularity);
-
-    
 }
 
 start();
