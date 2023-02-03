@@ -1,19 +1,22 @@
 const puppeteer = require('puppeteer');
 
+
 async function start(){
+    console.time("dbsave");
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto("https://www.mtgtop8.com/format?f=LE");
+    await page.goto("https://www.mtgtop8.com/format?f=ST");
     
     /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
     Don't forget to add the main url to the url saved in the json data when sending it out
     Ex. https://www.mtgtop8.com/ + url
-    They all share the class name S14(Complete)
+    They all share the class name S14
     */
     let deckArchtypes = await page.evaluate( () => {
         const results = [];
         const mainUrl = 'https://www.mtgtop8.com/';
         const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
         item.forEach(element => {
             results.push({
                 deckName:  element.textContent, //Saves the deck archetype name 
@@ -24,14 +27,14 @@ async function start(){
     });
 
     // Next step click each deckArchetype and save the first link of the deck shown (Completed)
-    let deckArchetypeUrl = []
+    let deckArchetypeUrl = [];
     for (let index = 0; index < deckArchtypes.length; index++) {
         deckArchetypeUrl.push(deckArchtypes[index].url);
         
     }
 
     //This solves the issue of getting the links to each individual deck
-    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    //Might only do one deck for each archetype since this is kind of overkill and could run into issues with server timing in the future.
     let decksUrl = [];
     for (let i = 0; i < deckArchetypeUrl.length; i++) {
         const url = deckArchetypeUrl[i];
@@ -39,7 +42,7 @@ async function start(){
         decksUrl[i] = await page.evaluate( () => {
             const results = [];
             const mainUrl = 'https://www.mtgtop8.com/';
-            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            const item = document.querySelectorAll('td:nth-child(2) > form > table > tbody  td:nth-child(2) > a');
             //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
             item.forEach(element => {
                 results.push(
@@ -58,7 +61,6 @@ async function start(){
         }else{
             oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
         }
-        
     }
 
     //Save the cards in an array with the number of each card in the deck(Complete)
@@ -88,8 +90,8 @@ async function start(){
             cards: cards[index] // Cards
         }
     }
+    console.timeEnd("dbsave");
     
-    console.log(finalDeck);
 
     await browser.close();
 }
