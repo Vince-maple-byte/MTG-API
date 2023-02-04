@@ -90,9 +90,10 @@ async function start(){
         }
     }
 
-    console.timeEnd("dbsave");
+    
 
     await browser.close();
+    console.timeEnd("dbsave");
 }
 
 start();
