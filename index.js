@@ -8,6 +8,7 @@ const legacy = require('./Decks/legacy.js');
 const pioneer = require('./Decks/pioneer.js');
 const historic = require('./Decks/historic.js');
 const explorer = require('./Decks/explorer.js');
+const pauper = require('./Decks/pauper.js')
 
 //Making all of the routes
 
@@ -69,6 +70,14 @@ app.get('/historic', (req, res) => {
 app.get('/explorer', (req, res) => {
     async function launch(){
         const deck = await explorer.start();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/pauper', (req, res) => {
+    async function launch(){
+        const deck = await pauper.start();
         res.send(deck);
     }
     launch();
