@@ -56,6 +56,14 @@ app.get('/pioneer', (req, res) => {
     launch();
 })
 
+app.get('/historic', (req, res) => {
+    async function launch(){
+        const deck = await pioneer.start();
+        res.send(deck);
+    }
+    launch();
+})
+
 app.listen(port, () => {
     console.log("Listening is port $1", [port]);
 })
