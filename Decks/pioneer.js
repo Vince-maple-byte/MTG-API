@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer');
 
 async function start(){
+    //console.time("dbsave");
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto("https://www.mtgtop8.com/format?f=ST");
+    await page.goto("https://www.mtgtop8.com/format?f=PI");
     
     /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
     Don't forget to add the main url to the url saved in the json data when sending it out
@@ -23,15 +24,6 @@ async function start(){
         });
         return results;
     });
-
-    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
-    /*
-    let deckArchetypeUrl = [];
-    for (let index = 0; index < deckArchtypes.length; index++) {
-        deckArchetypeUrl.push(deckArchtypes[index].url);
-        
-    }
-    */
 
     //This solves the issue of getting the links to each individual deck
     //Might only do one deck for each archetype since this is kind of overkill and could run into issues with server timing in the future.
@@ -53,18 +45,6 @@ async function start(){
             return results;
         })
     }
-    
-    //This creates only one deck link for each deck archetype(Complete)
-    /*
-    let oneDeckUrl = new Array(decksUrl.length);
-    for (let index = 0; index < decksUrl.length; index++) {
-        if(decksUrl[index] == undefined){
-            oneDeckUrl[index] = "No Deck Available";
-        }else{
-            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
-        }
-    }
-    */
 
     //Save the cards in an array with the number of each card in the deck(Complete)
     let cards = [];
@@ -73,7 +53,6 @@ async function start(){
         await page.goto(`${url}`);
         cards[i] = await page.evaluate( () => {
             const results = [];
-            //const mainUrl = 'https://www.mtgtop8.com/';
             const number = document.querySelectorAll('.deck_line.hover_tr');
             number.forEach(element => {
                 results.push(
@@ -94,8 +73,10 @@ async function start(){
         }
     }
 
+    console.log(finalDeck);
     await browser.close();
-    return finalDeck;
+    //return finalDeck;
 }
+start();
+//module.exports = {start};
 
-module.exports = {start};
