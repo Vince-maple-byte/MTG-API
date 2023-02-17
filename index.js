@@ -5,7 +5,7 @@ const standard = require('./Decks/standard.js');
 const modern = require('./Decks/modern.js');
 const vintage = require('./Decks/vintage.js');
 const legacy = require('./Decks/legacy.js');
-
+const pioneer = require('./Decks/pioneer.js');
 
 //Making all of the routes
 
@@ -43,6 +43,14 @@ app.get('/vintage', (req, res) => {
 app.get('/legacy', (req, res) => {
     async function launch(){
         const deck = await legacy.start();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/pioneer', (req, res) => {
+    async function launch(){
+        const deck = await pioneer.start();
         res.send(deck);
     }
     launch();
