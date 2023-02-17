@@ -1,7 +1,6 @@
 const puppeteer = require('puppeteer');
 
 async function start(){
-    console.time("dbsave");
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto("https://www.mtgtop8.com/format?f=LE");
@@ -93,6 +92,6 @@ async function start(){
     
 
     await browser.close();
-    console.timeEnd("dbsave");
+    return finalDeck;
 }
 module.exports = {start};
