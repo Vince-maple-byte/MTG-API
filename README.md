@@ -1,6 +1,6 @@
 # MTG API
 
-![plot]("C:\Users\BunnySoo\Pictures\Saved Pictures\black_lotus.jpg")
+![black_lotus](https://user-images.githubusercontent.com/73848683/219573928-da183629-6df6-42bf-8777-35fc038c12d8.jpg)
 
 Hello, this project entails me making a web scrapper for the website MTG Top 8. 
 The data being scrapped is 1 deck of each named in the formats of Standard, Modern, Vintage, and Legacy.
