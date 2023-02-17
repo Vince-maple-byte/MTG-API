@@ -8,7 +8,8 @@ const legacy = require('./Decks/legacy.js');
 const pioneer = require('./Decks/pioneer.js');
 const historic = require('./Decks/historic.js');
 const explorer = require('./Decks/explorer.js');
-const pauper = require('./Decks/pauper.js')
+const pauper = require('./Decks/pauper.js');
+const duelCommander = require('./Decks/duel-commander.js')
 
 //Making all of the routes
 
@@ -78,6 +79,14 @@ app.get('/explorer', (req, res) => {
 app.get('/pauper', (req, res) => {
     async function launch(){
         const deck = await pauper.start();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/duel-commander', (req, res) => {
+    async function launch(){
+        const deck = await duelCommander.start();
         res.send(deck);
     }
     launch();
