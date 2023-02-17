@@ -9,6 +9,7 @@ Finally a web api is going to be created to allow users to fetch the data.
 UPDATE: I was able to scrape for the formats explorer, historic, pioneer, and pauper. (2/17/2023)
 
 Future goals: 
+    
     1) Add a couple of more formats
     2) Allow the user to select the different versions of each format 
         Ex. Standard has multiple different metagame breakdowns for different time periods such as Last 2 months, Last 2 weeks, etc. Currently right now the way I have it set up is that the first option is shown, so the goal would be to allow the user to select which time period they want.
