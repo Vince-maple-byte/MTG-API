@@ -1,8 +1,7 @@
 const puppeteer = require('puppeteer');
 
-
 async function start(){
-    console.time("dbsave");
+    //console.time("dbsave");
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto("https://www.mtgtop8.com/format?f=ST");
@@ -95,11 +94,10 @@ async function start(){
             cards: cards[index] // Cards
         }
     }
-    console.log(finalDeck);
-    console.timeEnd("dbsave");
-    
+    //console.timeEnd("dbsave");
 
     await browser.close();
+    return finalDeck;
 }
 
-start();
+module.exports = {start};

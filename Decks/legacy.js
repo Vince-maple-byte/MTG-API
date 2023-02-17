@@ -95,5 +95,4 @@ async function start(){
     await browser.close();
     console.timeEnd("dbsave");
 }
-
-start();
+module.exports = {start};

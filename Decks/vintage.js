@@ -88,10 +88,8 @@ async function start(){
             cards: cards[index] // Cards
         }
     }
-    
-    console.log(finalDeck);
 
     await browser.close();
+    return finalDeck;
 }
-
-start();
+module.exports = {start};

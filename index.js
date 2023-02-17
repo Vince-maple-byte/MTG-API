@@ -1,18 +1,53 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const puppeteer = require('puppeteer');
-const test = require('./Decks/standard.js');
+const standard = require('./Decks/standard.js');
+const modern = require('./Decks/modern.js');
+const vintage = require('./Decks/vintage.js');
+const legacy = require('./Decks/legacy.js');
 
 
+//Making all of the routes
 
 app.get('/', (req, res) => {
-    //res.send(typeof cardJson);
-    res.send(cardJson);
+    
+    res.send('Select a MTG format to get data');
+})
+
+
+app.get('/standard', (req, res) => {
+    async function launch(){
+        const deck = await standard.start();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/modern', (req, res) => {
+    async function launch(){
+        const deck = await modern.start();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/vintage', (req, res) => {
+    async function launch(){
+        const deck = await vintage.start();
+        res.send(deck);
+    }
+    launch();
+})
+
+
+app.get('/legacy', (req, res) => {
+    async function launch(){
+        const deck = await legacy.start();
+        res.send(deck);
+    }
+    launch();
 })
 
 app.listen(port, () => {
     console.log("Listening is port $1", [port]);
 })
-
-start();
