@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.send('Select a MTG format to get data');
 })
 
-
+//Standard api routes
 app.get('/standard', (req, res) => {
     async function launch(){
         const deck = await standard.start();
@@ -27,6 +27,7 @@ app.get('/standard', (req, res) => {
     launch();
 })
 
+//Modern api routes
 app.get('/modern', (req, res) => {
     async function launch(){
         const deck = await modern.start();
@@ -35,6 +36,7 @@ app.get('/modern', (req, res) => {
     launch();
 })
 
+//Vintage api routes
 app.get('/vintage', (req, res) => {
     async function launch(){
         const deck = await vintage.start();
@@ -43,7 +45,7 @@ app.get('/vintage', (req, res) => {
     launch();
 })
 
-
+//Legacy api routes
 app.get('/legacy', (req, res) => {
     async function launch(){
         const deck = await legacy.start();
@@ -52,6 +54,7 @@ app.get('/legacy', (req, res) => {
     launch();
 })
 
+//Pioneer api routes
 app.get('/pioneer', (req, res) => {
     async function launch(){
         const deck = await pioneer.start();
@@ -60,6 +63,7 @@ app.get('/pioneer', (req, res) => {
     launch();
 })
 
+//Historic api routes
 app.get('/historic', (req, res) => {
     async function launch(){
         const deck = await historic.start();
@@ -68,6 +72,7 @@ app.get('/historic', (req, res) => {
     launch();
 })
 
+//Explorer api routes
 app.get('/explorer', (req, res) => {
     async function launch(){
         const deck = await explorer.start();
@@ -76,6 +81,7 @@ app.get('/explorer', (req, res) => {
     launch();
 })
 
+//Pauper api routes
 app.get('/pauper', (req, res) => {
     async function launch(){
         const deck = await pauper.start();
@@ -84,6 +90,7 @@ app.get('/pauper', (req, res) => {
     launch();
 })
 
+//Duel Commander api routes
 app.get('/duel-commander', (req, res) => {
     async function launch(){
         const deck = await duelCommander.start();
