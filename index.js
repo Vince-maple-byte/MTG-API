@@ -14,7 +14,9 @@ const cedh = require('./Decks/cedh.js');
 const alchemy = require('./Decks/alchemy.js');
 const peasant = require('./Decks/peasant.js');
 const block = require('./Decks/block.js');
-const extended = require('./Decks/extended.js')
+const extended = require('./Decks/extended.js');
+const highlander = require('./Decks/highlander.js');
+
 
 //Making all of the routes
 
@@ -153,6 +155,15 @@ app.get('/Block', (req, res) => {
 app.get('/extended', (req, res) => {
     async function launch(){
         const deck = await extended.extended();
+        res.send(deck);
+    }
+    launch();
+})
+
+//Highlander api routes
+app.get('/highlander', (req, res) => {
+    async function launch(){
+        const deck = await highlander.highlander();
         res.send(deck);
     }
     launch();
