@@ -16,6 +16,7 @@ const peasant = require('./Decks/peasant.js');
 const block = require('./Decks/block.js');
 const extended = require('./Decks/extended.js');
 const highlander = require('./Decks/highlander.js');
+const canadian_highlander = require('./Decks/canadianHighlander.js');
 
 
 //Making all of the routes
@@ -143,7 +144,7 @@ app.get('/peasant', (req, res) => {
 })
 
 //Block api routes
-app.get('/Block', (req, res) => {
+app.get('/block', (req, res) => {
     async function launch(){
         const deck = await block.block();
         res.send(deck);
@@ -164,6 +165,15 @@ app.get('/extended', (req, res) => {
 app.get('/highlander', (req, res) => {
     async function launch(){
         const deck = await highlander.highlander();
+        res.send(deck);
+    }
+    launch();
+})
+
+//Canadian Highlander api routes
+app.get('/canadianhighlander', (req, res) => {
+    async function launch(){
+        const deck = await canadian_highlander.canadianHighlander();
         res.send(deck);
     }
     launch();
