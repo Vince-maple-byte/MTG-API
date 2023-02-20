@@ -9,7 +9,8 @@ const pioneer = require('./Decks/pioneer.js');
 const historic = require('./Decks/historic.js');
 const explorer = require('./Decks/explorer.js');
 const pauper = require('./Decks/pauper.js');
-const duelCommander = require('./Decks/duel-commander.js')
+const duelCommander = require('./Decks/duel-commander.js');
+const cedh = require('./Decks/cedh.js');
 
 //Making all of the routes
 
@@ -103,6 +104,15 @@ app.get('/pauper', (req, res) => {
 app.get('/duel-commander', (req, res) => {
     async function launch(){
         const deck = await duelCommander.start();
+        res.send(deck);
+    }
+    launch();
+})
+
+//cEDH api routes
+app.get('/cedh', (req, res) => {
+    async function launch(){
+        const deck = await cedh.cedh();
         res.send(deck);
     }
     launch();
