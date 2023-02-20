@@ -3,8 +3,7 @@ const puppeteer = require('puppeteer');
 async function canadianHighlander(){
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto("https://www.mtgtop8.com/format?f=CHL");
-
+    await page.goto("https://www.mtgtop8.com/format?f=C");
     
     /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
     Don't forget to add the main url to the url saved in the json data when sending it out

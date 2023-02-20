@@ -7,10 +7,12 @@ The data being scrapped is 1 deck of each named in the formats of Standard, Mode
 Finally a web api is going to be created to allow users to fetch the data.
 
 UPDATE: I was able to scrape for the formats explorer, historic, pioneer, and pauper. (2/17/2023)
+UPDATE: I was able to add all of the formats available from the website. The only format that I have 
+trouble with is cEDH which most likely has to deal with how slow the web page itself is. (2/17/2023)
 
 ### Future goals: 
 
-- [ ] Issue 1: Add a couple of more formats
+- [X] Issue 1: Add a couple of more formats (2/20/2023)
 - [ ] Issue 2: Allow the user to select the different versions of each format 
     Ex. Standard has multiple different metagame breakdowns for different time periods such as Last 2 months, Last 2 weeks, etc. Currently right now the way I have             it set up is that the first option is shown, so the goal would be to allow the user to select which time period they want.
 - [ ] Issue 3: Make specific api routes that allow users to select how many decks they want in the chosen format
