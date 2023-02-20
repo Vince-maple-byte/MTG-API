@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-async function start(){
+async function alchemy(){
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto("https://www.mtgtop8.com/format?f=ALCH");
@@ -91,9 +91,7 @@ async function start(){
         }
     }
     
-    console.log(finalDeck);
     await browser.close();
     return finalDeck;
 }
-start();
-module.exports = {start};
+module.exports = {alchemy};
