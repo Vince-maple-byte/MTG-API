@@ -12,6 +12,7 @@ const pauper = require('./Decks/pauper.js');
 const duelCommander = require('./Decks/duel-commander.js');
 const cedh = require('./Decks/cedh.js');
 const alchemy = require('./Decks/alchemy.js')
+const peasant = require('./Decks/peasant.js')
 
 //Making all of the routes
 
@@ -123,6 +124,15 @@ app.get('/cedh', (req, res) => {
 app.get('/alchemy', (req, res) => {
     async function launch(){
         const deck = await alchemy.alchemy();
+        res.send(deck);
+    }
+    launch();
+})
+
+//Peasant api routes
+app.get('/peasant', (req, res) => {
+    async function launch(){
+        const deck = await peasant.peasant();
         res.send(deck);
     }
     launch();
