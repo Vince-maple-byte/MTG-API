@@ -21,7 +21,16 @@ app.get('/', (req, res) => {
 //Standard api routes
 app.get('/standard', (req, res) => {
     async function launch(){
-        const deck = await standard.start();
+        const deck = await standard.standardLast2Months();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/standard/:standardId', (req, res) => {
+    async function launch(){
+        const standardFunction = req.params.standardId;
+        const deck = await standard[standardFunction]();
         res.send(deck);
     }
     launch();
