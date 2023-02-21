@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer');
 
-async function start(){
+module.exports = {last2Months, };
+
+async function last2Months(){
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto("https://www.mtgtop8.com/format?f=MO");
@@ -95,4 +97,3 @@ async function start(){
     await browser.close();
     return finalDeck;
 }
-module.exports = {start};
