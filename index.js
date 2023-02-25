@@ -64,7 +64,7 @@ app.get('/modern/:modernFormatId', (req, res) => {
 //Vintage api routes
 app.get('/vintage', (req, res) => {
     async function launch(){
-        const deck = await vintage.start();
+        const deck = await vintage.last4Months();
         res.send(deck);
     }
     launch();
@@ -82,7 +82,7 @@ app.get('/vintage/:vintageFormatId', (req, res) => {
 //Legacy api routes
 app.get('/legacy', (req, res) => {
     async function launch(){
-        const deck = await legacy.start();
+        const deck = await legacy.last2Months();
         res.send(deck);
     }
     launch();
@@ -91,7 +91,7 @@ app.get('/legacy', (req, res) => {
 app.get('/legacy/:legacyFormatId', (req, res) => {
     async function launch(){
         const legacyFunction = req.params.legacyFormatId;
-        const deck = await legacy[legacyFormatId]();
+        const deck = await legacy[legacyFunction]();
         res.send(deck);
     }
     launch();
@@ -100,7 +100,16 @@ app.get('/legacy/:legacyFormatId', (req, res) => {
 //Pioneer api routes
 app.get('/pioneer', (req, res) => {
     async function launch(){
-        const deck = await pioneer.start();
+        const deck = await pioneer.last2Months();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/pioneer/:pioneerFormatId', (req, res) => {
+    async function launch(){
+        const pioneerFunction = req.params.pioneerFormatId;
+        const deck = await pioneer[pioneerFunction]();
         res.send(deck);
     }
     launch();
