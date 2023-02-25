@@ -46,7 +46,7 @@ app.get('/standard/:standardFormatId', (req, res) => {
 //Modern api routes
 app.get('/modern', (req, res) => {
     async function launch(){
-        const deck = await modern.start();
+        const deck = await modern.last2Months();
         res.send(deck);
     }
     launch();
@@ -58,12 +58,22 @@ app.get('/modern/:modernFormatId', (req, res) => {
         const deck = await modern[modernFunction]();
         res.send(deck);
     }
+    launch();
 })
 
 //Vintage api routes
 app.get('/vintage', (req, res) => {
     async function launch(){
         const deck = await vintage.start();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/vintage/:vintageFormatId', (req, res) => {
+    async function launch(){
+        const vintageFunction = req.params.vintageFormatId;
+        const deck = await vintage[vintageFunction]();
         res.send(deck);
     }
     launch();
