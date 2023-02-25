@@ -1,6 +1,11 @@
 const puppeteer = require('puppeteer');
+module.exports = {last2Months, last2weeks, majorEvents4months, liveTournaments, all2023Decks,
+   all2022Decks, all2021Decks, all2020Decks, all2019Decks, all2018Decks, all2017Decks,
+   all2016Decks, all2015Decks, all2014Decks, all2013Decks, all2012Decks, all2011Decks,
+   majorEventsDecks, allDecks 
+};
 
-async function start(){
+async function last2Months(){
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto("https://www.mtgtop8.com/format?f=LE");
@@ -94,4 +99,1711 @@ async function start(){
     await browser.close();
     return finalDeck;
 }
-module.exports = {start};
+
+async function last2weeks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=34&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function majorEvents4months(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=188&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function liveTournaments(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=72&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2023Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=245&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2022Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=237&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2021Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=219&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2020Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=199&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2019Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=182&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2018Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=164&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2017Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=143&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2016Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=117&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2015Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=100&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2014Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=81&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2013Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=80&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2012Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=6&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function all2011Decks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=61&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function majorEventsDecks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=27&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    
+
+    await browser.close();
+    return finalDeck;
+}
+
+async function allDecks(){
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("https://www.mtgtop8.com/format?f=LE&meta=16&a=");
+    
+    /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
+    Don't forget to add the main url to the url saved in the json data when sending it out
+    Ex. https://www.mtgtop8.com/ + url
+    They all share the class name S14(Complete)
+    */
+    let deckArchtypes = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('td:nth-child(1) div.S14 > a');
+        item.forEach(element => {
+            results.push({
+                deckName:  element.textContent, //Saves the deck archetype name 
+                url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+            });
+        });
+        return results;
+    });
+
+    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
+    let deckArchetypeUrl = []
+    for (let index = 0; index < deckArchtypes.length; index++) {
+        deckArchetypeUrl.push(deckArchtypes[index].url);
+        
+    }
+
+    //This solves the issue of getting the links to each individual deck
+    //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
+    let decksUrl = [];
+    for (let i = 0; i < deckArchetypeUrl.length; i++) {
+        const url = deckArchetypeUrl[i];
+        await page.goto(`${url}`);
+        decksUrl[i] = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('td:nth-child(2) > form:nth-child(1) > table > tbody  td:nth-child(2) > a');
+            //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
+            item.forEach(element => {
+                results.push(
+                     mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                );
+            });
+            return results;
+        })
+    }
+    
+    //This creates only one deck link for each deck archetype(Complete)
+    let oneDeckUrl = new Array(decksUrl.length);
+    for (let index = 0; index < decksUrl.length; index++) {
+        if(decksUrl[index] == undefined){
+            oneDeckUrl[index] = "No Deck Available";
+        }else{
+            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
+        }
+        
+    }
+
+    //Save the cards in an array with the number of each card in the deck(Complete)
+    let cards = [];
+    for (let i = 0; i < oneDeckUrl.length; i++) {
+        const url = oneDeckUrl[i];
+        await page.goto(`${url}`);
+        cards[i] = await page.evaluate( () => {
+            const results = [];
+            //const mainUrl = 'https://www.mtgtop8.com/';
+            const number = document.querySelectorAll('.deck_line.hover_tr');
+            number.forEach(element => {
+                results.push(
+                    element.textContent //Saves all of the cards with the amount in the deck
+                );
+            });
+            return results;
+        })
+    }
+
+    //Final array with the deckName, deckUrl, and the cards all in one
+    let finalDeck = [];
+    for(let index = 0; index < oneDeckUrl.length; index++){
+        finalDeck[index] = {
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            url: oneDeckUrl[index], //Deck link
+            cards: cards[index] // Cards
+        }
+    }
+
+    await browser.close();
+    return finalDeck;
+}

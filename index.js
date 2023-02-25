@@ -88,6 +88,15 @@ app.get('/legacy', (req, res) => {
     launch();
 })
 
+app.get('/legacy/:legacyFormatId', (req, res) => {
+    async function launch(){
+        const legacyFunction = req.params.legacyFormatId;
+        const deck = await legacy[legacyFormatId]();
+        res.send(deck);
+    }
+    launch();
+})
+
 //Pioneer api routes
 app.get('/pioneer', (req, res) => {
     async function launch(){
