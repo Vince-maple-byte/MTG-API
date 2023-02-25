@@ -22,7 +22,6 @@ const canadian_highlander = require('./Decks/canadianHighlander.js');
 //Making all of the routes
 
 app.get('/', (req, res) => {
-    
     res.send('Select a MTG format to get data');
 })
 
@@ -35,9 +34,9 @@ app.get('/standard', (req, res) => {
     launch();
 })
 
-app.get('/standard/:standardId', (req, res) => {
+app.get('/standard/:standardFormatId', (req, res) => {
     async function launch(){
-        const standardFunction = req.params.standardId;
+        const standardFunction = req.params.standardFormatId;
         const deck = await standard[standardFunction]();
         res.send(deck);
     }
@@ -51,6 +50,14 @@ app.get('/modern', (req, res) => {
         res.send(deck);
     }
     launch();
+})
+
+app.get('/modern/:modernFormatId', (req, res) => {
+    async function launch(){
+        const modernFunction = req.params.modernFormatId;
+        const deck = await modern[modernFunction]();
+        res.send(deck);
+    }
 })
 
 //Vintage api routes
