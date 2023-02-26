@@ -178,7 +178,17 @@ app.get('/duel-commander', (req, res) => {
     launch();
 })
 
-//cEDH api routes
+app.get('/duel-commander/:duel-commanderFormatId', (req, res) => {
+    async function launch(){
+        const duelcommanderFunction = req.params.duelcommanderFormatId;
+        const deck = await duelCommander[duelcommanderFunction]();
+        res.send(deck);
+    }
+    launch();
+})
+
+
+//cEDH api routes Ignore for now
 app.get('/cedh', (req, res) => {
     async function launch(){
         const deck = await cedh.cedh();
