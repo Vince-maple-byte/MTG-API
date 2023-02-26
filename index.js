@@ -160,6 +160,15 @@ app.get('/pauper', (req, res) => {
     launch();
 })
 
+app.get('/pauper/:pauperFormatId', (req, res) => {
+    async function launch(){
+        const pauperFunction = req.params.pauperFormatId;
+        const deck = await pauper[pauperFunction]();
+        res.send(deck);
+    }
+    launch();
+})
+
 //Duel Commander api routes
 app.get('/duel-commander', (req, res) => {
     async function launch(){
