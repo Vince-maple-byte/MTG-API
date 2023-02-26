@@ -197,7 +197,7 @@ app.get('/cedh', (req, res) => {
     launch();
 })
 
-//Alchemy api routes
+//Alchemy api routes. Only has one valid api route
 app.get('/alchemy', (req, res) => {
     async function launch(){
         const deck = await alchemy.alchemy();
