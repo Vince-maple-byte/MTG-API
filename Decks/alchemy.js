@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+module.exports = {alchemy};
 
 async function alchemy(){
     const browser = await puppeteer.launch();
@@ -94,4 +95,3 @@ async function alchemy(){
     await browser.close();
     return finalDeck;
 }
-module.exports = {alchemy};

@@ -154,7 +154,7 @@ app.get('/explorer/:explorerFormatId', (req, res) => {
 //Pauper api routes
 app.get('/pauper', (req, res) => {
     async function launch(){
-        const deck = await pauper.start();
+        const deck = await pauper.last2Months();
         res.send(deck);
     }
     launch();
@@ -172,7 +172,7 @@ app.get('/pauper/:pauperFormatId', (req, res) => {
 //Duel Commander api routes
 app.get('/duel-commander', (req, res) => {
     async function launch(){
-        const deck = await duelCommander.start();
+        const deck = await duelCommander.last3Months();
         res.send(deck);
     }
     launch();
@@ -191,7 +191,7 @@ app.get('/duel-commander/:duel-commanderFormatId', (req, res) => {
 //cEDH api routes Ignore for now
 app.get('/cedh', (req, res) => {
     async function launch(){
-        const deck = await cedh.cedh();
+        const deck = await cedh.start();
         res.send(deck);
     }
     launch();
