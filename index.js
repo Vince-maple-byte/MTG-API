@@ -136,7 +136,16 @@ app.get('/historic/:historicFormatId', (req, res) => {
 //Explorer api routes
 app.get('/explorer', (req, res) => {
     async function launch(){
-        const deck = await explorer.start();
+        const deck = await explorer.last4Months();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/explorer/:explorerFormatId', (req, res) => {
+    async function launch(){
+        const explorerFunction = req.params.explorerFormatId;
+        const deck = await explorer[explorerFunction]();
         res.send(deck);
     }
     launch();
