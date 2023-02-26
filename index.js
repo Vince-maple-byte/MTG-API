@@ -118,7 +118,16 @@ app.get('/pioneer/:pioneerFormatId', (req, res) => {
 //Historic api routes
 app.get('/historic', (req, res) => {
     async function launch(){
-        const deck = await historic.start();
+        const deck = await historic.last2Months();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/historic/:historicFormatId', (req, res) => {
+    async function launch(){
+        const historicFunction = req.params.historicFormatId;
+        const deck = await historic[historicFunction]();
         res.send(deck);
     }
     launch();
