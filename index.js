@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 //Standard api routes
 app.get('/standard', (req, res) => {
     async function launch(){
-        const deck = await standard.standardLast2Months();
+        const deck = await standard.standard();
         res.send(deck);
     }
     launch();
@@ -37,7 +37,7 @@ app.get('/standard', (req, res) => {
 app.get('/standard/:standardFormatId', (req, res) => {
     async function launch(){
         const standardFunction = req.params.standardFormatId;
-        const deck = await standard[standardFunction]();
+        const deck = await standard.standardFormat(`${standardFunction}`);
         res.send(deck);
     }
     launch();
@@ -46,7 +46,7 @@ app.get('/standard/:standardFormatId', (req, res) => {
 //Modern api routes
 app.get('/modern', (req, res) => {
     async function launch(){
-        const deck = await modern.last2Months();
+        const deck = await modern.modern();
         res.send(deck);
     }
     launch();
@@ -55,7 +55,7 @@ app.get('/modern', (req, res) => {
 app.get('/modern/:modernFormatId', (req, res) => {
     async function launch(){
         const modernFunction = req.params.modernFormatId;
-        const deck = await modern[modernFunction]();
+        const deck = await modern.modernFormat(modernFunction);
         res.send(deck);
     }
     launch();
@@ -64,7 +64,7 @@ app.get('/modern/:modernFormatId', (req, res) => {
 //Vintage api routes
 app.get('/vintage', (req, res) => {
     async function launch(){
-        const deck = await vintage.last4Months();
+        const deck = await vintage.vintage();
         res.send(deck);
     }
     launch();
@@ -73,7 +73,7 @@ app.get('/vintage', (req, res) => {
 app.get('/vintage/:vintageFormatId', (req, res) => {
     async function launch(){
         const vintageFunction = req.params.vintageFormatId;
-        const deck = await vintage[vintageFunction]();
+        const deck = await vintage.vintageFormat(vintageFunction);
         res.send(deck);
     }
     launch();
@@ -82,7 +82,7 @@ app.get('/vintage/:vintageFormatId', (req, res) => {
 //Legacy api routes
 app.get('/legacy', (req, res) => {
     async function launch(){
-        const deck = await legacy.last2Months();
+        const deck = await legacy.legacy();
         res.send(deck);
     }
     launch();
@@ -91,7 +91,7 @@ app.get('/legacy', (req, res) => {
 app.get('/legacy/:legacyFormatId', (req, res) => {
     async function launch(){
         const legacyFunction = req.params.legacyFormatId;
-        const deck = await legacy[legacyFunction]();
+        const deck = await legacy.legacyFormat(legacyFunction);
         res.send(deck);
     }
     launch();
@@ -100,7 +100,7 @@ app.get('/legacy/:legacyFormatId', (req, res) => {
 //Pioneer api routes
 app.get('/pioneer', (req, res) => {
     async function launch(){
-        const deck = await pioneer.last2Months();
+        const deck = await pioneer.pioneer();
         res.send(deck);
     }
     launch();
@@ -109,7 +109,7 @@ app.get('/pioneer', (req, res) => {
 app.get('/pioneer/:pioneerFormatId', (req, res) => {
     async function launch(){
         const pioneerFunction = req.params.pioneerFormatId;
-        const deck = await pioneer[pioneerFunction]();
+        const deck = await pioneer.pioneerFormat(pioneerFunction);
         res.send(deck);
     }
     launch();
@@ -118,7 +118,7 @@ app.get('/pioneer/:pioneerFormatId', (req, res) => {
 //Historic api routes
 app.get('/historic', (req, res) => {
     async function launch(){
-        const deck = await historic.last2Months();
+        const deck = await historic.historic();
         res.send(deck);
     }
     launch();
@@ -127,7 +127,7 @@ app.get('/historic', (req, res) => {
 app.get('/historic/:historicFormatId', (req, res) => {
     async function launch(){
         const historicFunction = req.params.historicFormatId;
-        const deck = await historic[historicFunction]();
+        const deck = await historic.historicFormat(historicFunction);
         res.send(deck);
     }
     launch();
@@ -154,7 +154,7 @@ app.get('/explorer/:explorerFormatId', (req, res) => {
 //Pauper api routes
 app.get('/pauper', (req, res) => {
     async function launch(){
-        const deck = await pauper.last2Months();
+        const deck = await pauper.pauper();
         res.send(deck);
     }
     launch();
@@ -163,7 +163,7 @@ app.get('/pauper', (req, res) => {
 app.get('/pauper/:pauperFormatId', (req, res) => {
     async function launch(){
         const pauperFunction = req.params.pauperFormatId;
-        const deck = await pauper[pauperFunction]();
+        const deck = await pauper.pauperFormat(pauperFunction);
         res.send(deck);
     }
     launch();
@@ -172,7 +172,7 @@ app.get('/pauper/:pauperFormatId', (req, res) => {
 //Duel Commander api routes
 app.get('/duel-commander', (req, res) => {
     async function launch(){
-        const deck = await duelCommander.last3Months();
+        const deck = await duelCommander.duelCommander();
         res.send(deck);
     }
     launch();
@@ -181,14 +181,14 @@ app.get('/duel-commander', (req, res) => {
 app.get('/duel-commander/:duel-commanderFormatId', (req, res) => {
     async function launch(){
         const duelcommanderFunction = req.params.duelcommanderFormatId;
-        const deck = await duelCommander[duelcommanderFunction]();
+        const deck = await duelCommander.duelCommanderFormat(duelcommanderFunction);
         res.send(deck);
     }
     launch();
 })
 
 
-//cEDH api routes Ignore for now
+//cEDH api routes: Ignore for now
 app.get('/cedh', (req, res) => {
     async function launch(){
         const deck = await cedh.start();
@@ -215,6 +215,15 @@ app.get('/peasant', (req, res) => {
     launch();
 })
 
+app.get('/peasant/:peasantFormatId', (req, res) => {
+    async function launch(){
+        const peasantFunction = req.params.peasantFormatId;
+        const deck = await peasant.peasantFormat(peasantFunction);
+        res.send(deck);
+    }
+    launch();
+})
+
 //Block api routes
 app.get('/block', (req, res) => {
     async function launch(){
@@ -223,6 +232,16 @@ app.get('/block', (req, res) => {
     }
     launch();
 })
+
+app.get('/block/:blockId', (req, res) => {
+    async function launch(){
+        const blockFunction = req.params.blockId;
+        const deck = await block.blockFormat(blockFunction);
+        res.send(deck);
+    }
+    launch();
+})
+
 
 //Extended api routes
 app.get('/extended', (req, res) => {
@@ -233,10 +252,29 @@ app.get('/extended', (req, res) => {
     launch();
 })
 
+app.get('/extended/:extendedId', (req, res) => {
+    async function launch(){
+        const extendedFunction = req.params.extendedId;
+        const deck = await extended.extendedFormat(extendedFunction);
+        res.send(deck);
+    }
+    launch();
+})
+
+
 //Highlander api routes
 app.get('/highlander', (req, res) => {
     async function launch(){
         const deck = await highlander.highlander();
+        res.send(deck);
+    }
+    launch();
+})
+
+app.get('/highlander/:highlanderId', (req, res) => {
+    async function launch(){
+        const highlanderFunction = req.params.highlanderId;
+        const deck = await highlander.highlanderFormat(highlanderFunction);
         res.send(deck);
     }
     launch();
