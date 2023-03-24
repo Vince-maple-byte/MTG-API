@@ -86,6 +86,7 @@ async function alchemy(){
     let finalDeck = [];
     for(let index = 0; index < oneDeckUrl.length; index++){
         finalDeck[index] = {
+            format: 'All Alchemy Decks',
             deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
             url: oneDeckUrl[index], //Deck link
             cards: cards[index] // Cards

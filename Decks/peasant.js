@@ -95,6 +95,7 @@ async function peasant(){
     let finalDeck = [];
     for(let index = 0; index < oneDeckUrl.length; index++){
         finalDeck[index] = {
+            format: 'allPeasantDecks',
             deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
             url: oneDeckUrl[index], //Deck link
             cards: cards[index] // Cards
@@ -192,6 +193,7 @@ async function peasantFormat(format){
         let finalDeck = [];
         for(let index = 0; index < oneDeckUrl.length; index++){
             finalDeck[index] = {
+                format: `${format}`,
                 deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
                 url: oneDeckUrl[index], //Deck link
                 cards: cards[index] // Cards

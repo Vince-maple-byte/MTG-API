@@ -68,6 +68,7 @@ async function last4Months(){
     let finalDeck = [];
     for(let index = 0; index < decksUrl.length; index++){
         finalDeck[index] = {
+            format: 'last4Months',
             deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
             url: decksUrl[index][0], //Deck link
             cards: cards[index] // Cards
@@ -146,6 +147,7 @@ async function allExplorerDecks(){
     let finalDeck = [];
     for(let index = 0; index < decksUrl.length; index++){
         finalDeck[index] = {
+            format: 'allExplorerDecks',
             deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
             url: decksUrl[index][0], //Deck link
             cards: cards[index] // Cards

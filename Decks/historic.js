@@ -31,16 +31,6 @@ async function historic(){
         });
         return results;
     });
-
-    // Next step click each deckArchetype and save the first link of the deck shown (Completed)
-    /*
-    let deckArchetypeUrl = [];
-    for (let index = 0; index < deckArchtypes.length; index++) {
-        deckArchetypeUrl.push(deckArchtypes[index].url);
-        
-    }
-    */
-
     //This solves the issue of getting the links to each individual deck
     //Might only do one deck for each archetype since this is kind of overkill and could run into issues with server timing in the future.
     let decksUrl = [];
@@ -61,18 +51,6 @@ async function historic(){
             return results;
         })
     }
-    
-    //This creates only one deck link for each deck archetype(Complete)
-    /*
-    let oneDeckUrl = new Array(decksUrl.length);
-    for (let index = 0; index < decksUrl.length; index++) {
-        if(decksUrl[index] == undefined){
-            oneDeckUrl[index] = "No Deck Available";
-        }else{
-            oneDeckUrl[index] = decksUrl[index][0]; //If I want all of the decks in the first page all I need to do is eliminate the [0]
-        }
-    }
-    */
 
     //Save the cards in an array with the number of each card in the deck(Complete)
     let cards = [];
@@ -96,6 +74,7 @@ async function historic(){
     let finalDeck = [];
     for(let index = 0; index < decksUrl.length; index++){
         finalDeck[index] = {
+            format: 'last2Months',
             deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
             url: decksUrl[index][0], //Deck link
             cards: cards[index] // Cards
@@ -193,6 +172,7 @@ async function historicFormat(format){
         let finalDeck = [];
         for(let index = 0; index < oneDeckUrl.length; index++){
             finalDeck[index] = {
+                format: `${format}`,
                 deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
                 url: oneDeckUrl[index], //Deck link
                 cards: cards[index] // Cards

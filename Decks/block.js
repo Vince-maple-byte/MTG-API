@@ -95,6 +95,7 @@ async function block(){
     let finalDeck = [];
     for(let index = 0; index < oneDeckUrl.length; index++){
         finalDeck[index] = {
+            format: 'khanBlock',
             deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
             url: oneDeckUrl[index], //Deck link
             cards: cards[index] // Cards
@@ -192,6 +193,7 @@ async function blockFormat(format){
         let finalDeck = [];
         for(let index = 0; index < oneDeckUrl.length; index++){
             finalDeck[index] = {
+                format: `${format}`,
                 deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
                 url: oneDeckUrl[index], //Deck link
                 cards: cards[index] // Cards

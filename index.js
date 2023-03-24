@@ -289,6 +289,10 @@ app.get('/canadianhighlander', (req, res) => {
     launch();
 })
 
+app.get('/redirect', (req, res) => {
+    res.redirect('https://google.com')
+})
+
 app.listen(port, () => {
     console.log("Listening is port $1", [port]);
 })
