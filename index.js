@@ -28,7 +28,8 @@ const standard = require('./routes/Decks/standardRoutes.js');
 app.use('/standard', standard);
 
 //Modern api routes
-
+const modern = require('./routes/Decks/modernRoutes.js');
+app.use('/modern', modern);
 
 //Vintage api routes
 app.get('/vintage', (req, res) => {
