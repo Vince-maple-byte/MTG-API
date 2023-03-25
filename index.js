@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const modern = require('./Decks/modern.js');
 const vintage = require('./Decks/vintage.js');
 const legacy = require('./Decks/legacy.js');
 const pioneer = require('./Decks/pioneer.js');
@@ -29,22 +28,7 @@ const standard = require('./routes/Decks/standardRoutes.js');
 app.use('/standard', standard);
 
 //Modern api routes
-app.get('/modern', (req, res) => {
-    async function launch(){
-        const deck = await modern.modern();
-        res.send(deck);
-    }
-    launch();
-})
 
-app.get('/modern/:modernFormatId', (req, res) => {
-    async function launch(){
-        const modernFunction = req.params.modernFormatId;
-        const deck = await modern.modernFormat(modernFunction);
-        res.send(deck);
-    }
-    launch();
-})
 
 //Vintage api routes
 app.get('/vintage', (req, res) => {
