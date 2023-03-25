@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const legacy  = require('../../Decks/legacy.js');
+const pioneer = require('../../Decks/pioneer.js')
 
 router.get('/', (req, res) => {
     async function launch(){
-        const deck = await legacy.legacy();
+        const deck = await pioneer.pioneer();
         res.send(deck);
     }
     launch();
 })
 
-router.get('/:legacyFormatId', (req, res) => {
+router.get('/:pioneerFormatId', (req, res) => {
     async function launch(){
-        const legacyFunction = req.params.legacyFormatId;
-        const deck = await legacy.legacyFormat(legacyFunction);
+        const pioneerFunction = req.params.pioneerFormatId;
+        const deck = await pioneer.pioneerFormat(pioneerFunction);
         res.send(deck);
     }
     launch();

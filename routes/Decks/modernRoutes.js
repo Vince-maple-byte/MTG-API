@@ -1,5 +1,5 @@
 const express = require('express');
-const modern = require('./Decks/modern.js');
+const modern  = require('../../Decks/modern.js');
 const router = express.Router();
 
 //Modern api routes

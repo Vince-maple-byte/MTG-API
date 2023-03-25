@@ -16,7 +16,7 @@ UPDATE: I was able to finish issue two, Some formats only had a limited amount o
 - [X] Issue 1: Add a couple of more formats (2/20/2023)
 - [X] Issue 2: Allow the user to select the different versions of each format 
     Ex. Standard has multiple different metagame breakdowns for different time periods such as Last 2 months, Last 2 weeks, etc. Currently right now the way I have             it set up is that the first option is shown, so the goal would be to allow the user to select which time period they want.
-- [ ] Issue 3: Format the api routes to be more cleaner with routes and middleware
+- [X] Issue 3: Format the api routes to be more cleaner with routes and middleware
 - [ ] Issue 4: Make specific api routes that allow users to chose a specific deck they want in a given format
 - [ ] Issue 5: Make a mongodb database to store all of the decks and make the api calls as needed.
 - [ ] Issue 6: Either deploy this in a free api service or figure out how to make this into an npm package (might just do both if push comes to shove).   
