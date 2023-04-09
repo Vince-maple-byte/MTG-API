@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const duelCommander = require('../../Decks/duel-commander.js')
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     async function launch(){
         const deck = await duelCommander.duelCommander();
         res.send(deck);
@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     launch();
 })
 
-app.get('/:duel-commanderFormatId', (req, res) => {
+router.get('/:duel-commanderFormatId', (req, res) => {
     async function launch(){
         const duelcommanderFunction = req.params.duelcommanderFormatId;
         const deck = await duelCommander.duelCommanderFormat(duelcommanderFunction);

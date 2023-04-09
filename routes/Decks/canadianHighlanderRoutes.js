@@ -3,7 +3,7 @@ const router = express.Router();
 const canadianHighlander = require('../../Decks/canadianhighlander.js');
 
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     async function launch(){
         const deck = await canadianHighlander.canadianHighlander();
         res.send(deck);
