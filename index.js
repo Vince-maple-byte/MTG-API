@@ -1,7 +1,11 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const mongooseConnection = require('./mongoose/mongoose-script.js');
 const app = express();
 const port = 3000;
 
+//Establish the connection with the mongodb collection
+mongooseConnection.main();
 
 //Making all of the routes
 

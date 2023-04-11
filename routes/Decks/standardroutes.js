@@ -15,15 +15,18 @@ router.route('/')
     .post((req, res) => {
         async function launch(){
             const deck = await standard.standard();
-            const createDeck = new Deck({
-                deckName: deck.deckName,
-                format: 'Standard',
-                formatVersion: deck.format,
-                url: deck.url,
-                cards: deck.cards
-            })
-            await createDeck.save();
-            console.log("Decks have been created");
+            for(let i = 0; i < deck.length; i++){
+                const createDeck = new Deck({
+                    deckName: deck[i].deckName,
+                    format: 'Standard',
+                    formatVersion: deck[i].format,
+                    url: deck[i].url,
+                    cards: deck[i].cards
+                })
+                await createDeck.save();
+            }
+            
+            res.send("Decks have been created");
         }
         launch().catch(err => console.log(err))
     })
@@ -35,13 +38,40 @@ router.route('/')
         launch();
     })
 
-router.get('/:standardFormatId', (req, res) => {
-    async function launch(){
-        const standardFunction = req.params.standardFormatId;
-        const deck = await standard.standardFormat(`${standardFunction}`);
-        res.send(deck);
-    }
-    launch();
-})
+router.route('/:standardFormatId')
+    .get((req, res) => {
+        async function launch(){
+            const standardFunction = req.params.standardFormatId;
+            const deck = await Deck.find({format: 'Standard', formatVersion: `${standardFunction}`});
+            res.send(deck);
+        }
+        launch();
+    })
+    .post((req, res) => {
+        async function launch(){
+            const standardFunction = req.params.standardFormatId;
+            const deck = await standard.standardFormat(`${standardFunction}`);
+            for(let i = 0; i < deck.length; i++){
+                const createDeck = new Deck({
+                    deckName: deck[i].deckName,
+                    format: 'Standard',
+                    formatVersion: deck[i].format,
+                    url: deck[i].url,
+                    cards: deck[i].cards
+                })
+                await createDeck.save();
+            }
+            res.send(`Decks in the standard format version ${standardFunction} have been created`);
+        }
+        launch();
+    })
+    .delete((req, res) => {
+        async function launch(){
+            const standardFunction = req.params.standardFormatId;
+            const deck = await Deck.deleteMany({format: 'Standard', formatVersion: `${standardFunction}`});
+            res.send(`Everything in the standard format version ${standardFunction} has been deleted`);
+        }
+        launch();
+    })
 
 module.exports = router;

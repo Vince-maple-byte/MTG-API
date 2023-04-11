@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const deckSchema = new mongoose.Schema({
-    deckName: String,
+    deckName: mongoose.SchemaTypes.Mixed,
     format: String, 
-    formatVersion: String,
-    url: String,
-    cards: [String]
+    formatVersion: mongoose.SchemaTypes.Mixed,
+    url: mongoose.SchemaTypes.Mixed,
+    cards: [mongoose.SchemaTypes.Mixed]
 });
 
 module.exports = mongoose.model('Deck', deckSchema);

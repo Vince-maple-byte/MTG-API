@@ -8,6 +8,7 @@ urlMap.set('standardLargeEventsLast2Months', "https://www.mtgtop8.com/format?f=S
 urlMap.set('standardPlayersTourOnline', "https://www.mtgtop8.com/format?f=ST&meta=210&a=")
 urlMap.set('standardAll2023Decks', "https://www.mtgtop8.com/format?f=ST&meta=250&a=")
 urlMap.set('standardAll2022Decks', "https://www.mtgtop8.com/format?f=ST&meta=249&a=")
+urlMap.set('standard2020to2021', "https://www.mtgtop8.com/format?f=ST&meta=217&a=")
 urlMap.set('standard2018To2019', "https://www.mtgtop8.com/format?f=ST&meta=175&a=")
 urlMap.set('standard2019To2020', "https://www.mtgtop8.com/format?f=ST&meta=187&a=")
 urlMap.set('standard2017To2018',"https://www.mtgtop8.com/format?f=ST&meta=161&a=")
