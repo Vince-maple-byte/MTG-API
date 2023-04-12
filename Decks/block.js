@@ -1,14 +1,12 @@
 const puppeteer = require('puppeteer');
 const urlMap = new Map();
-urlMap.set(
-    'khanBlock', 'https://www.mtgtop8.com/format?f=BL',
-    'otherBlockEvents', 'https://www.mtgtop8.com/format?f=BL&meta=229&a=',
-    'therosBlock', 'https://www.mtgtop8.com/format?f=BL&meta=68&a=',
-    'returnToRavnicaBlock', 'https://www.mtgtop8.com/format?f=BL&meta=60&a=',
-    'innistradBlock', 'https://www.mtgtop8.com/format?f=BL&meta=17&a=',
-    'scarsBlock', 'https://www.mtgtop8.com/format?f=BL&meta=18&a=',
-    'allPT', 'https://www.mtgtop8.com/format?f=BL&meta=93&a='
-)
+urlMap.set('khanBlock', 'https://www.mtgtop8.com/format?f=BL');
+urlMap.set('otherBlockEvents', 'https://www.mtgtop8.com/format?f=BL&meta=229&a=');
+urlMap.set('therosBlock', 'https://www.mtgtop8.com/format?f=BL&meta=68&a=');
+urlMap.set('returnToRavnicaBlock', 'https://www.mtgtop8.com/format?f=BL&meta=60&a=');
+urlMap.set('innistradBlock', 'https://www.mtgtop8.com/format?f=BL&meta=17&a=');
+urlMap.set('scarsBlock', 'https://www.mtgtop8.com/format?f=BL&meta=18&a=');
+urlMap.set('allPT', 'https://www.mtgtop8.com/format?f=BL&meta=93&a=');
 
 async function block(){
     const browser = await puppeteer.launch();
@@ -108,7 +106,7 @@ async function block(){
 
 async function blockFormat(format){
     if(!(urlMap.has(`${format}`))){
-        return 'Select the correct vintage format to view the decks';
+        return 'Select the correct block format to view the decks ' + `${format}`;
     }
     else{
         const browser = await puppeteer.launch();
