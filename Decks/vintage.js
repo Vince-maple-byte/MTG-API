@@ -1,20 +1,16 @@
 const puppeteer = require('puppeteer');
 const urlMap = new Map();
-urlMap.set(
-    'last4Months', "https://www.mtgtop8.com/format?f=VI",
-    'last2Months', "https://www.mtgtop8.com/format?f=VI&meta=82&a=",
-    'liveTournaments', "https://www.mtgtop8.com/format?f=VI&meta=83&a=",
-    'all2023Decks', "https://www.mtgtop8.com/format?f=VI&meta=244&a=",
-    'all2022Decks', "https://www.mtgtop8.com/format?f=VI&meta=238&a=",
-    'all2021to2020Decks', "https://www.mtgtop8.com/format?f=VI&meta=221&a=",
-    'all2019to2018Decks', "https://www.mtgtop8.com/format?f=VI&meta=167&a=",
-    'all2017to2015Decks', "https://www.mtgtop8.com/format?f=VI&meta=148&a=",
-    'all2014to2011Decks', "https://www.mtgtop8.com/format?f=VI&meta=15&a=",
-    'allMajorEvents', "https://www.mtgtop8.com/format?f=VI&meta=40&a=",
-    'allDecks', "https://www.mtgtop8.com/format?f=VI&meta=14&a="
-)
-
-
+urlMap.set('last4Months', "https://www.mtgtop8.com/format?f=VI")
+urlMap.set('last2Months', "https://www.mtgtop8.com/format?f=VI&meta=82&a=")
+urlMap.set('liveTournaments', "https://www.mtgtop8.com/format?f=VI&meta=83&a=")
+urlMap.set('all2023Decks', "https://www.mtgtop8.com/format?f=VI&meta=244&a=")
+urlMap.set('all2022Decks', "https://www.mtgtop8.com/format?f=VI&meta=238&a=")
+urlMap.set('all2021to2020Decks', "https://www.mtgtop8.com/format?f=VI&meta=221&a=")
+urlMap.set('all2019to2018Decks', "https://www.mtgtop8.com/format?f=VI&meta=167&a=")
+urlMap.set('all2017to2015Decks', "https://www.mtgtop8.com/format?f=VI&meta=148&a=")
+urlMap.set('all2014to2011Decks', "https://www.mtgtop8.com/format?f=VI&meta=15&a=")
+urlMap.set('allMajorEvents', "https://www.mtgtop8.com/format?f=VI&meta=40&a=")
+urlMap.set('allDecks', "https://www.mtgtop8.com/format?f=VI&meta=14&a=")
 
 async function vintage(){
     const browser = await puppeteer.launch();

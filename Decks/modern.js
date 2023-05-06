@@ -1,28 +1,24 @@
 const puppeteer = require('puppeteer');
 const urlMap = new Map()
-urlMap.set(
-    'last2Months', "https://www.mtgtop8.com/format?f=MO",
-    'last2Weeks', "https://www.mtgtop8.com/format?f=MO&meta=54&a=",
-    'lastMajorEvents', "https://www.mtgtop8.com/format?f=MO&meta=57&a=",
-    'liveTournaments', "https://www.mtgtop8.com/format?f=MO&meta=57&a=",
-    'all2023Decks', "https://www.mtgtop8.com/format?f=MO&meta=246&a=",
-    'all2022Decks', "https://www.mtgtop8.com/format?f=MO&meta=236&a=",
-    'all2021Decks', "https://www.mtgtop8.com/format?f=MO&meta=220&a=",
-    'all2020Decks', "https://www.mtgtop8.com/format?f=MO&meta=200&a=",
-    'all2019Decks', "https://www.mtgtop8.com/format?f=MO&meta=183&a=",
-    'all2018Decks', "https://www.mtgtop8.com/format?f=MO&meta=163&a=",
-    'all2017Decks', "https://www.mtgtop8.com/format?f=MO&meta=142&a=",
-    'all2016Decks', "https://www.mtgtop8.com/format?f=MO&meta=118&a=",
-    'all2015Decks', "https://www.mtgtop8.com/format?f=MO&meta=101&a=",
-    'all2014Decks', "https://www.mtgtop8.com/archetype?f=MO&meta=79&a=189",
-    'all2013Decks', "https://www.mtgtop8.com/archetype?f=MO&meta=77&a=189",
-    'all2012Decks', "https://www.mtgtop8.com/archetype?f=MO&meta=76&a=189",
-    'all2011Decks', "https://www.mtgtop8.com/format?f=MO&meta=78&a=",
-    'allModernDecks', "https://www.mtgtop8.com/format?f=MO&meta=44&a=",
-    'allPt', "https://www.mtgtop8.com/format?f=MO&meta=92&a="
-)
-
-
+urlMap.set('last2Months', "https://www.mtgtop8.com/format?f=MO")
+urlMap.set('last2Weeks', "https://www.mtgtop8.com/format?f=MO&meta=54&a=")
+urlMap.set('lastMajorEvents', "https://www.mtgtop8.com/format?f=MO&meta=57&a=")
+urlMap.set('liveTournaments', "https://www.mtgtop8.com/format?f=MO&meta=57&a=")
+urlMap.set('all2023Decks', "https://www.mtgtop8.com/format?f=MO&meta=246&a=")
+urlMap.set('all2022Decks', "https://www.mtgtop8.com/format?f=MO&meta=236&a=")
+urlMap.set('all2021Decks', "https://www.mtgtop8.com/format?f=MO&meta=220&a=")
+urlMap.set('all2020Decks', "https://www.mtgtop8.com/format?f=MO&meta=200&a=")
+urlMap.set('all2019Decks', "https://www.mtgtop8.com/format?f=MO&meta=183&a=")
+urlMap.set('all2018Decks', "https://www.mtgtop8.com/format?f=MO&meta=163&a=")
+urlMap.set('all2017Decks', "https://www.mtgtop8.com/format?f=MO&meta=142&a=")
+urlMap.set('all2016Decks', "https://www.mtgtop8.com/format?f=MO&meta=118&a=")
+urlMap.set('all2015Decks', "https://www.mtgtop8.com/format?f=MO&meta=101&a=")
+urlMap.set('all2014Decks', "https://www.mtgtop8.com/archetype?f=MO&meta=79&a=189")
+urlMap.set('all2013Decks', "https://www.mtgtop8.com/archetype?f=MO&meta=77&a=189")
+urlMap.set('all2012Decks', "https://www.mtgtop8.com/archetype?f=MO&meta=76&a=189")
+urlMap.set('all2011Decks', "https://www.mtgtop8.com/format?f=MO&meta=78&a=")
+urlMap.set('allModernDecks', "https://www.mtgtop8.com/format?f=MO&meta=44&a=")   
+urlMap.set('allPt', "https://www.mtgtop8.com/format?f=MO&meta=92&a=")
 
 async function modern(){
     const browser = await puppeteer.launch();

@@ -1,23 +1,21 @@
 const puppeteer = require('puppeteer');
 const urlMap = new Map();
-urlMap.set(
-    'last3Months', "https://www.mtgtop8.com/format?f=EDH",
-    'lastMonths', "https://www.mtgtop8.com/format?f=EDH&meta=115&a=",
-    'lastMajorEvents', "https://www.mtgtop8.com/format?f=EDH&meta=130&a=",
-    'last12Months', "https://www.mtgtop8.com/format?f=EDH&meta=209&a=",
-    'all2023Decks', "https://www.mtgtop8.com/format?f=EDH&meta=252&a=",
-    'all2022Decks', "https://www.mtgtop8.com/format?f=EDH&meta=233&a=",
-    'all2021Decks', "https://www.mtgtop8.com/format?f=EDH&meta=216&a=",
-    'alll2020Decks', "https://www.mtgtop8.com/format?f=EDH&meta=198&a=",
-    'all2019Decks', "https://www.mtgtop8.com/format?f=EDH&meta=181&a=",
-    'all2018Decks', "https://www.mtgtop8.com/format?f=EDH&meta=166&a=",
-    'all2017Decks', "https://www.mtgtop8.com/format?f=EDH&meta=146&a=",
-    'all2016Decks', "https://www.mtgtop8.com/format?f=EDH&meta=122&a=",
-    'all2015Decks', "https://www.mtgtop8.com/format?f=EDH&meta=99&a=",
-    'all2014Decks', "https://www.mtgtop8.com/format?f=EDH&meta=129&a=",
-    'majorEvents', "https://www.mtgtop8.com/format?f=EDH&meta=196&a=",
-    'allCommanderDecks', "https://www.mtgtop8.com/format?f=EDH&meta=56&a="
-)
+urlMap.set('last3Months', "https://www.mtgtop8.com/format?f=EDH")
+urlMap.set('lastMonths', "https://www.mtgtop8.com/format?f=EDH&meta=115&a=");
+urlMap.set('lastMajorEvents', "https://www.mtgtop8.com/format?f=EDH&meta=130&a=");
+urlMap.set('last12Months', "https://www.mtgtop8.com/format?f=EDH&meta=209&a=");
+urlMap.set('all2023Decks', "https://www.mtgtop8.com/format?f=EDH&meta=252&a=");
+urlMap.set('all2022Decks', "https://www.mtgtop8.com/format?f=EDH&meta=233&a=");
+urlMap.set('all2021Decks', "https://www.mtgtop8.com/format?f=EDH&meta=216&a=");
+urlMap.set('alll2020Decks', "https://www.mtgtop8.com/format?f=EDH&meta=198&a=");    
+urlMap.set('all2019Decks', "https://www.mtgtop8.com/format?f=EDH&meta=181&a=");  
+urlMap.set('all2018Decks', "https://www.mtgtop8.com/format?f=EDH&meta=166&a=");    
+urlMap.set('all2017Decks', "https://www.mtgtop8.com/format?f=EDH&meta=146&a=");    
+urlMap.set('all2016Decks', "https://www.mtgtop8.com/format?f=EDH&meta=122&a=");    
+urlMap.set('all2015Decks', "https://www.mtgtop8.com/format?f=EDH&meta=99&a=");   
+urlMap.set('all2014Decks', "https://www.mtgtop8.com/format?f=EDH&meta=129&a=");    
+urlMap.set('majorEvents', "https://www.mtgtop8.com/format?f=EDH&meta=196&a=");
+urlMap.set('allCommanderDecks', "https://www.mtgtop8.com/format?f=EDH&meta=56&a=");
 module.exports = {duelCommander, duelCommanderFormat};
 
 async function duelCommander(){

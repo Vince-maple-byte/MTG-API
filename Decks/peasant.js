@@ -1,14 +1,12 @@
 const puppeteer = require('puppeteer');
 const urlMap = new Map();
-urlMap.set(
-    'allPeasantDecks', 'https://www.mtgtop8.com/format?f=PEA&meta=205&a=',
-    'banlistE7', 'https://www.mtgtop8.com/format?f=PEA&meta=225&a=',
-    'banlistE6toE5', 'https://www.mtgtop8.com/format?f=PEA&meta=207&a=',
-    'banlistE4', 'https://www.mtgtop8.com/format?f=PEA&meta=179&a=',
-    'banlistE3', 'https://www.mtgtop8.com/format?f=PEA&meta=124&a=',
-    'banlistE2', 'https://www.mtgtop8.com/format?f=PEA&meta=151&a=',
-    'banlistE1', 'https://www.mtgtop8.com/format?f=PEA&meta=150&a='
-)
+urlMap.set('allPeasantDecks', 'https://www.mtgtop8.com/format?f=PEA&meta=205&a=')
+urlMap.set('banlistE7', 'https://www.mtgtop8.com/format?f=PEA&meta=225&a=')
+urlMap.set('banlistE6toE5', 'https://www.mtgtop8.com/format?f=PEA&meta=207&a=')
+urlMap.set('banlistE4', 'https://www.mtgtop8.com/format?f=PEA&meta=179&a=')
+urlMap.set('banlistE3', 'https://www.mtgtop8.com/format?f=PEA&meta=124&a=')
+urlMap.set('banlistE2', 'https://www.mtgtop8.com/format?f=PEA&meta=151&a=') 
+urlMap.set('banlistE1', 'https://www.mtgtop8.com/format?f=PEA&meta=150&a=')
 
 async function peasant(){
     const browser = await puppeteer.launch();

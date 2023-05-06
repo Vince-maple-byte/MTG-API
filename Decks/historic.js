@@ -1,12 +1,11 @@
 const puppeteer = require('puppeteer');
+
 const urlMap = new Map();
-urlMap.set(
-    'last2Months',"https://www.mtgtop8.com/format?f=HI",
-    'all2023Decks',"https://www.mtgtop8.com/archetype?f=HI&meta=248&a=971",
-    'all2022Decks',"https://www.mtgtop8.com/archetype?f=HI&meta=234&a=971",
-    'all2021Decks',"https://www.mtgtop8.com/archetype?f=HI&meta=218&a=971",
-    'allHistoricDecks',"https://www.mtgtop8.com/archetype?f=HI&meta=215&a=971"
-)
+urlMap.set('last2Months',"https://www.mtgtop8.com/format?f=HI")
+urlMap.set('all2023Decks',"https://www.mtgtop8.com/archetype?f=HI&meta=248&a=971")
+urlMap.set('all2022Decks',"https://www.mtgtop8.com/archetype?f=HI&meta=234&a=971")
+urlMap.set('all2021Decks',"https://www.mtgtop8.com/archetype?f=HI&meta=218&a=971")
+urlMap.set('allHistoricDecks',"https://www.mtgtop8.com/archetype?f=HI&meta=215&a=971")
 
 async function historic(){
     const browser = await puppeteer.launch();

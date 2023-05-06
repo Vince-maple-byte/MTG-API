@@ -1,19 +1,17 @@
 const puppeteer = require('puppeteer');
 const urlMap = new Map();
-urlMap.set(
-    'last2Months', "https://www.mtgtop8.com/format?f=PAU",
-    'last4Months', "https://www.mtgtop8.com/format?f=PAU&meta=127&a=",
-    'liveTournaments', "https://www.mtgtop8.com/format?f=PAU&meta=185&a=",
-    'all2023Decks', "https://www.mtgtop8.com/format?f=PAU&meta=251&a=",
-    'all2022Decks', "https://www.mtgtop8.com/format?f=PAU&meta=239&a=",
-    'all2021Decks', "https://www.mtgtop8.com/format?f=PAU&meta=224&a=",
-    'all2020Decks', "https://www.mtgtop8.com/format?f=PAU&meta=223&a=",
-    'all2019Decks', "https://www.mtgtop8.com/format?f=PAU&meta=186&a=",
-    'all2018Decks', "https://www.mtgtop8.com/format?f=PAU&meta=170&a=",
-    'all2017Decks', "https://www.mtgtop8.com/format?f=PAU&meta=169&a=",
-    'all2016Decks', "https://www.mtgtop8.com/format?f=PAU&meta=168&a=",
-    'allPauperDecks', "https://www.mtgtop8.com/format?f=PAU&meta=110&a="
-)
+urlMap.set('last2Months', "https://www.mtgtop8.com/format?f=PAU")
+urlMap.set('last4Months', "https://www.mtgtop8.com/format?f=PAU&meta=127&a=")
+urlMap.set('liveTournaments', "https://www.mtgtop8.com/format?f=PAU&meta=185&a=")
+urlMap.set('all2023Decks', "https://www.mtgtop8.com/format?f=PAU&meta=251&a=")
+urlMap.set('all2022Decks', "https://www.mtgtop8.com/format?f=PAU&meta=239&a=")
+urlMap.set('all2021Decks', "https://www.mtgtop8.com/format?f=PAU&meta=224&a=")
+urlMap.set('all2020Decks', "https://www.mtgtop8.com/format?f=PAU&meta=223&a=")
+urlMap.set('all2019Decks', "https://www.mtgtop8.com/format?f=PAU&meta=186&a=")
+urlMap.set('all2018Decks', "https://www.mtgtop8.com/format?f=PAU&meta=170&a=")
+urlMap.set('all2017Decks', "https://www.mtgtop8.com/format?f=PAU&meta=169&a=")
+urlMap.set('all2016Decks', "https://www.mtgtop8.com/format?f=PAU&meta=168&a=")
+urlMap.set('allPauperDecks', "https://www.mtgtop8.com/format?f=PAU&meta=110&a=")
 
 async function pauper(){
     const browser = await puppeteer.launch();

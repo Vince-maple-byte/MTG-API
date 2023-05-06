@@ -1,16 +1,14 @@
 const puppeteer = require('puppeteer');
 const urlMap = new Map();
-urlMap.set(
-    'allDecks', 'https://www.mtgtop8.com/format?f=EX',
-    'lorwyn', 'https://www.mtgtop8.com/format?f=EX&meta=20&a=',
-    'timeSpiral', 'https://www.mtgtop8.com/format?f=EX&meta=112&a=',
-    'mirrodin', 'https://www.mtgtop8.com/format?f=EX&meta=111&a=',
-    'onSlaught', 'https://www.mtgtop8.com/format?f=EX&meta=21&a=',
-    'invasion', 'https://www.mtgtop8.com/format?f=EX&meta=23&a=',
-    'tempest', 'https://www.mtgtop8.com/format?f=EX&meta=7&a=', 
-    'iceAge', 'https://www.mtgtop8.com/format?f=EX&meta=41&a=',
-    'allPT', 'https://www.mtgtop8.com/format?f=EX&meta=94&a='
-)
+urlMap.set('allDecks', 'https://www.mtgtop8.com/format?f=EX');
+urlMap.set('lorwyn', 'https://www.mtgtop8.com/format?f=EX&meta=20&a=');
+urlMap.set('timeSpiral', 'https://www.mtgtop8.com/format?f=EX&meta=112&a=');
+urlMap.set('mirrodin', 'https://www.mtgtop8.com/format?f=EX&meta=111&a=');
+urlMap.set('onSlaught', 'https://www.mtgtop8.com/format?f=EX&meta=21&a=');
+urlMap.set('invasion', 'https://www.mtgtop8.com/format?f=EX&meta=23&a=');
+urlMap.set('tempest', 'https://www.mtgtop8.com/format?f=EX&meta=7&a='); 
+urlMap.set('iceAge', 'https://www.mtgtop8.com/format?f=EX&meta=41&a=');
+urlMap.set('allPT', 'https://www.mtgtop8.com/format?f=EX&meta=94&a=');
 
 async function extended(){
     const browser = await puppeteer.launch();

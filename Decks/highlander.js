@@ -1,12 +1,11 @@
 const puppeteer = require('puppeteer');
+
 const urlMap = new Map();
-urlMap.set(
-    'last24Months', 'https://www.mtgtop8.com/format?f=HIGH',
-    'allDecks2014to2017', 'https://www.mtgtop8.com/format?f=HIGH&meta=90&a=',
-    'allDecks2005to2013', 'https://www.mtgtop8.com/format?f=HIGH&meta=89&a=',
-    'allHighlanderDecks', 'https://www.mtgtop8.com/format?f=HIGH&meta=88&a=',
-    'allGP', 'https://www.mtgtop8.com/format?f=HIGH&meta=116&a='
-)
+urlMap.set('last24Months', 'https://www.mtgtop8.com/format?f=HIGH');
+urlMap.set('allDecks2014to2017', 'https://www.mtgtop8.com/format?f=HIGH&meta=90&a=');
+urlMap.set('allDecks2005to2013', 'https://www.mtgtop8.com/format?f=HIGH&meta=89&a=');
+urlMap.set('allHighlanderDecks', 'https://www.mtgtop8.com/format?f=HIGH&meta=88&a=');
+urlMap.set('allGP', 'https://www.mtgtop8.com/format?f=HIGH&meta=116&a=');
 
 async function highlander(){
     const browser = await puppeteer.launch();

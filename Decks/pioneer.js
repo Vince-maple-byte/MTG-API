@@ -1,16 +1,14 @@
 const puppeteer = require('puppeteer');
 const urlMap = new Map();
-urlMap.set(
-    'last2Months', "https://www.mtgtop8.com/format?f=PI",
-    'last2Weeks', "https://www.mtgtop8.com/format?f=PI&meta=194&a=",
-    'all2023Decks', "https://www.mtgtop8.com/format?f=PI&meta=247&a=",
-    'all2022Decks', "https://www.mtgtop8.com/format?f=PI&meta=235&a=",
-    'all2021Decks', "https://www.mtgtop8.com/format?f=PI&meta=222&a=",
-    'all2020Decks', "https://www.mtgtop8.com/format?f=PI&meta=202&a=",
-    'all2019Decks', "https://www.mtgtop8.com/format?f=PI&meta=201&a=",
-    'allPioneer', "https://www.mtgtop8.com/format?f=PI&meta=191&a="
-)
 
+urlMap.set('last2Months', "https://www.mtgtop8.com/format?f=PI")
+urlMap.set('last2Weeks', "https://www.mtgtop8.com/format?f=PI&meta=194&a=")
+urlMap.set('all2023Decks', "https://www.mtgtop8.com/format?f=PI&meta=247&a=")
+urlMap.set('all2022Decks', "https://www.mtgtop8.com/format?f=PI&meta=235&a=")
+urlMap.set('all2021Decks', "https://www.mtgtop8.com/format?f=PI&meta=222&a=")
+urlMap.set('all2020Decks', "https://www.mtgtop8.com/format?f=PI&meta=202&a=")
+urlMap.set('all2019Decks', "https://www.mtgtop8.com/format?f=PI&meta=201&a=")
+urlMap.set('allPioneer', "https://www.mtgtop8.com/format?f=PI&meta=191&a=")
 
 async function pioneer(){
     //console.time("dbsave");
