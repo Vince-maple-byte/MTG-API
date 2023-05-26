@@ -40,20 +40,20 @@ router.route('/')
         async function launch(){
             try {
                 const deck = await Deck.deleteMany({format: "Explorer"});
-                res.status(200).send("Everything in the highlander format has been deleted");
+                res.status(200).send("Everything in the Explorer format has been deleted");
             } catch (error) {
                 res.status(400);
                 res.send(error);
             }
         }
         launch();
-    })
+    });
 
 router.route('/:explorerFormatId')
     .get((req,res) => {
         try {
             async function launch(){
-                const deck = await Deck.findMany({format: 'Explorer', formatVersion: `${req.params.explorerFormatId}`})
+                const deck = await Deck.find({format: 'Explorer', formatVersion: `${req.params.explorerFormatId}`})
                 res.status(200).send(deck);
             }
             launch();

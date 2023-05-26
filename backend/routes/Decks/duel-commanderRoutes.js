@@ -47,27 +47,27 @@ router.route('/:duelCommanderFormatId')
     })
     .post((req, res) => {
         async function launch(){
-            const duelcommanderFunction = req.params.standardFormatId;
-            const deck = await standard.standardFormat(`${duelcommanderFunction}`);
+            const duelCommanderFunction = req.params.duelCommanderFormatId;
+            const deck = await duelCommander.duelCommanderFormat(`${duelCommanderFunction}`);
             for(let i = 0; i < deck.length; i++){
                 const createDeck = new Deck({
                     deckName: deck[i].deckName,
-                    format: 'Standard',
+                    format: 'Duel Commander',
                     formatVersion: deck[i].format,
                     url: deck[i].url,
                     cards: deck[i].cards
                 })
                 await createDeck.save();
             }
-            res.send(`Decks in the duel commander format version ${duelcommanderFunction} have been created`);
+            res.send(`Decks in the duel commander format version ${duelCommanderFunction} have been created`);
         }
         launch();
     })
     .delete((req, res) => {
         async function launch(){
-            const standardFunction = req.params.standardFormatId;
-            const deck = await Deck.deleteMany({format: 'Standard', formatVersion: `${standardFunction}`});
-            res.send(`Everything in the standard format version ${standardFunction} has been deleted`);
+            const duelCommanderFunction = req.params.duelCommanderFormatId;
+            const deck = await Deck.deleteMany({format: 'Duel Commander', formatVersion: `${duelCommanderFunction}`});
+            res.send(`Everything in the Duel Commander format version ${duelCommanderFunction} has been deleted`);
         }
         launch();
     })

@@ -12,11 +12,18 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    async function launch(){
-        await cedh.start();
-        //await cedh.deckUrl();
+    try {
+        async function launch(){
+            await cedh.start();
+            await cedh.deckUrl();
+            await cedh.cards();
+            res.status(200).send("Successfully created the cEDH decks")
+        }
+        launch();
+    } catch (error) {
+        res.status(400).send(error + " error code");
     }
-    launch();
+    
 })
 
 router.delete('/', (req, res) => {

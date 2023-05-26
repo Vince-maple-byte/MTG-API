@@ -7,7 +7,7 @@ urlMap.set('last12Months', "https://www.mtgtop8.com/format?f=EDH&meta=209&a=");
 urlMap.set('all2023Decks', "https://www.mtgtop8.com/format?f=EDH&meta=252&a=");
 urlMap.set('all2022Decks', "https://www.mtgtop8.com/format?f=EDH&meta=233&a=");
 urlMap.set('all2021Decks', "https://www.mtgtop8.com/format?f=EDH&meta=216&a=");
-urlMap.set('alll2020Decks', "https://www.mtgtop8.com/format?f=EDH&meta=198&a=");    
+urlMap.set('all2020Decks', "https://www.mtgtop8.com/format?f=EDH&meta=198&a=");    
 urlMap.set('all2019Decks', "https://www.mtgtop8.com/format?f=EDH&meta=181&a=");  
 urlMap.set('all2018Decks', "https://www.mtgtop8.com/format?f=EDH&meta=166&a=");    
 urlMap.set('all2017Decks', "https://www.mtgtop8.com/format?f=EDH&meta=146&a=");    
