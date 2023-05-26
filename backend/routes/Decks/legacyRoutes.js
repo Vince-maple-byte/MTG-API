@@ -53,7 +53,7 @@ router.route('/:legacyId')
     .get((req,res) => {
         try {
             async function launch(){
-                const deck = await Deck.findMany({format: 'Legacy', formatVersion: `${req.params.legacyId}`})
+                const deck = await Deck.find({format: 'Legacy', formatVersion: `${req.params.legacyId}`})
                 res.status(200).send(deck);
             }
             launch();

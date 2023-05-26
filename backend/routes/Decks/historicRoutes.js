@@ -66,7 +66,7 @@ router.route('/:historicId')
         try {
             async function launch(){
                 const format = req.params.explorerFormatId;
-                const deck = await highlander.highlanderFormat(req.params.highlanderId);
+                const deck = await historic.historicFormat(req.params.historicId);
                 for(let i = 0; i < deck.length; i++){
                     const createDeck = await new Deck({
                         deckName: deck[i].deckName,
