@@ -1,2 +1,3 @@
 #Ignore some unnecessary files
 routes/test.js
+node_modules/

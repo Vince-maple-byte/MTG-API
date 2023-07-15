@@ -19,5 +19,5 @@ UPDATE: I was able to finish issue two, Some formats only had a limited amount o
 - [X] Issue 3: Format the api routes to be more cleaner with routes and middleware
 - [X] Issue 4: Make specific api routes that allow users to chose a specific deck they want in a given format
 - [X] Issue 5: Make a mongodb database to store all of the decks and make the api calls as needed.
-- [ ] Issue 6: Either deploy this in a free api service or figure out how to make this into an npm package (might just do both if push comes to shove).   
+- [X] Issue 6: Either deploy this in a free api service or figure out how to make this into an npm package (might just do both if push comes to shove).   
 

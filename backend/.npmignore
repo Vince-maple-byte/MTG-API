@@ -1,0 +1,5 @@
+mongoose/
+node_modules/
+routes/
+cards.txt
+index.js

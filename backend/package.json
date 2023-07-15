@@ -1,8 +1,7 @@
 {
-  "name": "mtgapiproject",
+  "name": "mtg_meta_decks",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Find the most recent meta decks based on the information of the website mtgtop8.com",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
