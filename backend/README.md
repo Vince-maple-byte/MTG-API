@@ -29,5 +29,48 @@ Each format in the website mtgtop8.com has different versions that a user can ac
 **Some formats have versions that simply didn't have enough information that I couldn't add it to the list. If this changes please send a github issue or a pull request so that I can fix it.**
 Below you will see a list of all of the formats with links to there functions and the list of versions that are available. **I will in the future add links to each version for the user to be able to see it in the original website.**
 
-- [Alchemy](###Installation)
+- [Alchemy](###San-)
 - [Block]
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+d
+dd
+dd
+d
+d
+dd
+ddd
+d
+d
+d
+dd
+d
+d
+d
+d
+dd
+d
+d
+d
+d
+### Snap
+Let's see
