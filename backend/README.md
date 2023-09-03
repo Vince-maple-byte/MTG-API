@@ -2,22 +2,32 @@
 
 ![black_lotus](https://user-images.githubusercontent.com/73848683/219573928-da183629-6df6-42bf-8777-35fc038c12d8.jpg)
 
-Hello, this project entails me making a web scrapper for the website MTG Top 8. 
-The data being scrapped is 1 deck of each named in the formats of Standard, Modern, Vintage, and Legacy.
-Finally a web api is going to be created to allow users to fetch the data.
+### Introduction
+Hello, this project entails me making a web scrapper for the website MTG Top 8.
+The website entails a list of the current meta decks used in the different game modes in the popular trading card game, Magic the Gathering (**Note that I am going to call these game modes formats from here on out**). 
+The data being scrapped is a list of meta decks in the formats of Standard, Modern, Vintage, Legacy, Canadian Highlander, Alchemy,
+Block, Duel Commander, Explorer, Extended, Highlander, Historic, Pauper, Peasant, and Pioneer. (**cEDH web scrapper doesn't work currently without the need of a database to store the information. Look at the github for a guideline on how to create your own version**)
 
-UPDATE: I was able to scrape for the formats explorer, historic, pioneer, and pauper. (2/17/2023)
-UPDATE: I was able to add all of the formats available from the website. The only format that I have 
-trouble with is cEDH which most likely has to deal with how slow the web page itself is. (2/17/2023)
-UPDATE: I was able to finish issue two, Some formats only had a limited amount of options that can be shown, so there is nothing we can do about that. I still need to figure out how to fix the cEDH format.(3/10/2023)
+### Installation
+npm install mtg_meta_decks
 
-### Future goals: 
+### How to use this library
+This library is separated by each of the formats, so if a user wants to access a specific format such as this:
+```ts
+const deck = require('mtg_meta_decks');
 
-- [X] Issue 1: Add a couple of more formats (2/20/2023)
-- [X] Issue 2: Allow the user to select the different versions of each format 
-    Ex. Standard has multiple different metagame breakdowns for different time periods such as Last 2 months, Last 2 weeks, etc. Currently right now the way I have             it set up is that the first option is shown, so the goal would be to allow the user to select which time period they want.
-- [X] Issue 3: Format the api routes to be more cleaner with routes and middleware
-- [X] Issue 4: Make specific api routes that allow users to chose a specific deck they want in a given format
-- [X] Issue 5: Make a mongodb database to store all of the decks and make the api calls as needed.
-- [X] Issue 6: Either deploy this in a free api service or figure out how to make this into an npm package (might just do both if push comes to shove).   
+async function start(){
+    let check = await deck.historic.historic();
+    console.log(check);
+}
+start();
+```
+Simply replace historic for the format that you want and historic() for the function that you want to use in the historic file.
 
+### Formats and their functions
+Each format in the website mtgtop8.com has different versions that a user can access. That is why most of the files in this library have 2 functions to access the data in a given format, one for a default version if you don't care, and one where you can specify which version that you want. 
+**Some formats have versions that simply didn't have enough information that I couldn't add it to the list. If this changes please send a github issue or a pull request so that I can fix it.**
+Below you will see a list of all of the formats with links to there functions and the list of versions that are available. **I will in the future add links to each version for the user to be able to see it in the original website.**
+
+- [Alchemy](###Installation)
+- [Block]
