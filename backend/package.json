@@ -1,6 +1,6 @@
 {
   "name": "mtg_meta_decks",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Find the most recent meta decks based on the information of the website mtgtop8.com",
   "main": "Decks/index.js",
 
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["mtg","magic the gathering","web scraping","backend"],
-  "author": "",
+  "author": "Vince Maple",
   "license": "ISC",
   "dependencies": {
     "puppeteer": "^19.4.1"
