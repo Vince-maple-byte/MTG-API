@@ -48,16 +48,16 @@ Below you will see a list of all of the formats with links to there functions an
 
 <!-- Do the rest of this tommorrow and I am done -->
 ### Alchemy
-**Functions available:** 
-    {Default} alchemy()
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} alchemy()<br>
+**Format Versions:**<br>
     {Default} *All Alchemy Decks*: (https://www.mtgtop8.com/format?f=ALCH)<br> 
 
 ### Block
-**Functions available:** 
-    {Default} block()
-    {Format Version} blockFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} block()<br>
+    {Format Version} blockFormat(format)<br>
+**Format Versions:**<br>
     {Default Version} *khanBlock*: (https://www.mtgtop8.com/format?f=BL)<br>
     *otherBlockEvents*: (https://www.mtgtop8.com/format?f=BL&meta=229&a=)<br>
     *therosBlock*: (https://www.mtgtop8.com/format?f=BL&meta=68&a=)<br>
@@ -68,16 +68,16 @@ Below you will see a list of all of the formats with links to there functions an
 
 
 ### Canadian Highlander
-**Functions available:** 
-    {Default} canadianHighlander()
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} canadianHighlander()<br>
+**Format Versions:**<br>
     {Default} *All Canadian Highlander Decks*: (https://www.mtgtop8.com/format?f=CHL)<br>
 
 ### Duel Commander
-**Functions available:** 
-    {Default} duelCommander()
-    duelCommanderFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} duelCommander()<br>
+    duelCommanderFormat(format)<br>
+**Format Versions:**<br>
     {Default} *last3Months*: (https://www.mtgtop8.com/format?f=EDH)<br>
     *lastMonths*: (https://www.mtgtop8.com/format?f=EDH&meta=115&a=)<br>
     *lastMajorEvents*: (https://www.mtgtop8.com/format?f=EDH&meta=130&a=)<br>
@@ -96,18 +96,18 @@ Below you will see a list of all of the formats with links to there functions an
     *allCommanderDecks*: https://www.mtgtop8.com/format?f=EDH&meta=56&a=)<br>
 
 ### Explorer
-**Functions available:** 
-    last4Months()
-    allExplorerDecks()
+**Functions available:**<br>
+    last4Months()<br>
+    allExplorerDecks()<br>
 **Format Versions:**
     *last4Months*: (https://www.mtgtop8.com/format?f=EXP)<br>
     *allExplorerDecks*: (https://www.mtgtop8.com/format?f=EXP&meta=243&a=)<br>
 
 ### Extended
-**Functions available:** 
-    {Default} extended()
-    extendedFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} extended()<br>
+    extendedFormat(format)<br>
+**Format Versions:**<br>
     {Default} *allDecks*: (https://www.mtgtop8.com/format?f=EX)<br>
     *lorwyn*: (https://www.mtgtop8.com/format?f=EX&meta=20&a=)<br>
     *timeSpiral*: (https://www.mtgtop8.com/format?f=EX&meta=112&a=)<br>
@@ -119,10 +119,10 @@ Below you will see a list of all of the formats with links to there functions an
     *allPT*: (https://www.mtgtop8.com/format?f=EX&meta=94&a=)<br>
 
 ### Highlander
-**Functions available:** 
-    {Default} highlander()
-    highlanderFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} highlander()<br>
+    highlanderFormat(format)<br>
+**Format Versions:**<br>
     {Default} *last24Months*: (https://www.mtgtop8.com/format?f=HIGH)<br>
     *allDecks2014to2017*: (https://www.mtgtop8.com/format?f=HIGH&meta=90&a=)<br>
     *allDecks2005to2013*: (https://www.mtgtop8.com/format?f=HIGH&meta=89&a=)<br>
@@ -130,10 +130,10 @@ Below you will see a list of all of the formats with links to there functions an
     *allGP*: (https://www.mtgtop8.com/format?f=HIGH&meta=116&a=)<br>
 
 ### Historic
-**Functions available:** 
-    {Default} historic()
-    historicFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} historic()<br>
+    historicFormat(format)<br>
+**Format Versions:**<br>
     {Default} *last2Months*:(https://www.mtgtop8.com/format?f=HI)<br>
     *all2023Decks*:(https://www.mtgtop8.com/archetype?f=HI&meta=248&a=971)<br>
     *all2022Decks*:(https://www.mtgtop8.com/archetype?f=HI&meta=234&a=971)<br>
@@ -141,10 +141,10 @@ Below you will see a list of all of the formats with links to there functions an
     *allHistoricDecks*:(https://www.mtgtop8.com/archetype?f=HI&meta=215&a=971)<br>
 
 ### Legacy
-**Functions available:** 
-    {Default} legacy()
-    legacyFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} legacy()<br>
+    legacyFormat(format)<br>
+**Format Versions:**<br>
     {Default} *last2Months*: (https://www.mtgtop8.com/format?f=LE)<br>
     *majorEvents4months*: (https://www.mtgtop8.com/format?f=LE&meta=188&a=)<br>
     *liveTournaments*: (https://www.mtgtop8.com/format?f=LE&meta=72&a=)<br>
@@ -165,10 +165,10 @@ Below you will see a list of all of the formats with links to there functions an
     *allDecks*: (https://www.mtgtop8.com/format?f=LE&meta=16&a=)<br>
 
 ### Modern
-**Functions available:** 
-    {Default} modern()
-    modernFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} modern()<br>
+    modernFormat(format)<br>
+**Format Versions:**<br>
     {Default} *last2Months*: (https://www.mtgtop8.com/format?f=MO)<br>
     *last2Weeks*: (https://www.mtgtop8.com/format?f=MO&meta=54&a=)<br>
     *lastMajorEvents*: (https://www.mtgtop8.com/format?f=MO&meta=57&a=)<br>
@@ -190,10 +190,10 @@ Below you will see a list of all of the formats with links to there functions an
     *allPt*: (https://www.mtgtop8.com/format?f=MO&meta=92&a=)<br>
 
 ### Pauper
-**Functions available:** 
-    {Default} pauper()
-    pauperFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} pauper()<br>
+    pauperFormat(format)<br>
+**Format Versions:**<br>
     {Default} *last2Months*: (https://www.mtgtop8.com/format?f=PAU)<br>
     *last4Months*: (https://www.mtgtop8.com/format?f=PAU&meta=127&a=)<br>
     *liveTournaments*: (https://www.mtgtop8.com/format?f=PAU&meta=185&a=)<br>
@@ -208,10 +208,10 @@ Below you will see a list of all of the formats with links to there functions an
     *allPauperDecks*: (https://www.mtgtop8.com/format?f=PAU&meta=110&a=)<br>
 
 ### Peasant
-**Functions available:** 
-    {Default} peasant()
-    peasantFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} peasant()<br>
+    peasantFormat(format)<br>
+**Format Versions:**<br>
     {Default} *allPeasantDecks*: (https://www.mtgtop8.com/format?f=PEA&meta=205&a=)<br>
     *banlistE7*: (https://www.mtgtop8.com/format?f=PEA&meta=225&a=)<br>
     *banlistE6toE5*: (https://www.mtgtop8.com/format?f=PEA&meta=207&a=)<br>
@@ -221,10 +221,10 @@ Below you will see a list of all of the formats with links to there functions an
     *banlistE1*: (https://www.mtgtop8.com/format?f=PEA&meta=150&a=)<br>
 
 ### Pioneer
-**Functions available:** 
-    {Default} pioneer()
-    pioneerFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} pioneer()<br>
+    pioneerFormat(format)<br>
+**Format Versions:**<br>
     {Default} *last2Months*: (https://www.mtgtop8.com/format?f=PI)<br>
     *last2Weeks*: (https://www.mtgtop8.com/format?f=PI&meta=194&a=)<br>
     *all2023Decks*: (https://www.mtgtop8.com/format?f=PI&meta=247&a=)<br>
@@ -235,10 +235,10 @@ Below you will see a list of all of the formats with links to there functions an
     *allPioneer*: (https://www.mtgtop8.com/format?f=PI&meta=191&a=)<br>
 
 ### Standard
-**Functions available:** 
-    {Default} standard()
-    standardFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} standard()<br>
+    standardFormat(format)<br>
+**Format Versions:**<br>
     {Default} *standardLast2Months*: (https://www.mtgtop8.com/format?f=ST)<br>
     *standardLast2Weeks*: (https://www.mtgtop8.com/format?f=ST&meta=50&a=)<br>
     *standardLargeEventsLast2Months*: (https://www.mtgtop8.com/format?f=ST&meta=46&a=)<br>
@@ -262,10 +262,10 @@ Below you will see a list of all of the formats with links to there functions an
     *allGrandPrix*: (https://www.mtgtop8.com/archetype?f=ST&meta=96&a=12)<br>
 
 ### Vintage
-**Functions available:** 
-    {Default} vintage()
-    vintageFormat(format)
-**Format Versions:** 
+**Functions available:**<br>
+    {Default} vintage()<br>
+    vintageFormat(format)<br>
+**Format Versions:**<br>
     {Default} *last4Months*: (https://www.mtgtop8.com/format?f=VI)<br>
     *last2Months*: (https://www.mtgtop8.com/format?f=VI&meta=82&a=)<br>
     *liveTournaments*: (https://www.mtgtop8.com/format?f=VI&meta=83&a=)<br>
@@ -278,5 +278,5 @@ Below you will see a list of all of the formats with links to there functions an
     *allMajorEvents*: (https://www.mtgtop8.com/format?f=VI&meta=40&a=)<br>
     *allDecks*: (https://www.mtgtop8.com/format?f=VI&meta=14&a=)<br>
 
-Github project link: https://github.com/Vince-maple-byte/MTG-API
+Github project link: https://github.com/Vince-maple-byte/MTG-API<br>
 Npm package: https://www.npmjs.com/package/mtg_meta_decks?activeTab=readme
