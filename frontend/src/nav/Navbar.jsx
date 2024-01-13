@@ -37,7 +37,7 @@ export default function Navbar(){
             <div className='nav--format_list'>
                 <h4>Home</h4>     
                 <h4>Formats</h4>
-                <h4>Cards</h4>
+                <h4>About Us</h4>
                 <h4>More</h4>
             </div>
         

@@ -5,9 +5,7 @@ function App() {
 
   return (
     <>
-      <div>
-        <Navbar />
-      </div>
+      <Navbar />
       <h1>Vite + React</h1>
       
     </>
