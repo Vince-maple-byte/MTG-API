@@ -1,0 +1,67 @@
+.nav{
+    border: 2px solid black;
+    display: flex;
+    padding: 0.5em;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #282A35;
+    color: white;
+}
+
+
+
+.nav--logo{
+    /* border: 1px solid blue; */
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.nav--image {
+    height: 2.25em;
+    width: 2.25em;
+    margin-right: 0.1em;
+}
+
+.nav--search{
+    margin-left: 2em;
+    border-radius: 5em;
+    display: flex;
+    height: 1em;
+    
+}
+
+.nav--search input {
+    border-radius: 10px;
+    text-align: center;
+}
+
+.nav--search button {
+    border-radius: 10px;
+    text-align: center;
+    padding: 2px;
+    cursor: pointer;
+    transition-delay: 0.25s;
+}
+
+.nav--search button:hover {
+    color: white;
+    background-color: #F2949C;
+    box-shadow: rgba(242,148,156, 0.25) 0px 54px 55px, rgba(242,148,156, 0.12) 0px -12px 30px, rgba(242,148,156, 0.12) 0px 4px 6px, rgba(242,148,156, 0.17) 0px 12px 13px, rgba(242,148,156, 0.09) 0px -3px 5px;
+}
+
+.nav--format_list{
+    display: flex;
+    font-size: 1.5rem;
+}
+
+.nav--format_list h4{
+    margin-left:2em;
+    transition-delay: 0.25s;
+}
+
+.nav--format_list h4:hover{
+    color: #F2949C;
+    cursor: pointer;
+    box-shadow: rgba(242,148,156, 0.4) 0px 5px, rgba(242,148,156, 0.3) 0px 10px, rgba(242,148,156, 0.2) 0px 15px, rgba(242,148,156, 0.1) 0px 20px, rgba(242,148,156, 0.05) 0px 25px;
+}
