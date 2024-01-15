@@ -4,7 +4,7 @@
     padding: 0.5em;
     align-items: center;
     justify-content: space-between;
-    background-color: #282A35;
+    background-color: #1C1D25;
     color: white;
 }
 
@@ -18,8 +18,8 @@
 }
 
 .nav--image {
-    height: 2.25em;
-    width: 2.25em;
+    height: 2.5em;
+    width: 2.5em;
     margin-right: 0.1em;
 }
 
@@ -46,8 +46,8 @@
 
 .nav--search button:hover {
     color: white;
-    background-color: #F2949C;
-    box-shadow: rgba(242,148,156, 0.25) 0px 54px 55px, rgba(242,148,156, 0.12) 0px -12px 30px, rgba(242,148,156, 0.12) 0px 4px 6px, rgba(242,148,156, 0.17) 0px 12px 13px, rgba(242,148,156, 0.09) 0px -3px 5px;
+    background-color: #F25781;
+    box-shadow: rgba(242,87,129, 0.25) 0px 54px 55px, rgba(242,87,129, 0.12) 0px -12px 30px, rgba(242,87,129, 0.12) 0px 4px 6px, rgba(242,87,129, 0.17) 0px 12px 13px, rgba(242,87,129, 0.09) 0px -3px 5px;
 }
 
 .nav--format_list{
@@ -55,13 +55,15 @@
     font-size: 1.5rem;
 }
 
-.nav--format_list h4{
+.nav--format_list a{
+    text-decoration: none;
+    color: white;
     margin-left:2em;
     transition-delay: 0.25s;
 }
 
-.nav--format_list h4:hover{
-    color: #F2949C;
+.nav--format_list a:hover{
+    color: #F25781;
     cursor: pointer;
-    box-shadow: rgba(242,148,156, 0.4) 0px 5px, rgba(242,148,156, 0.3) 0px 10px, rgba(242,148,156, 0.2) 0px 15px, rgba(242,148,156, 0.1) 0px 20px, rgba(242,148,156, 0.05) 0px 25px;
+    box-shadow: rgba(242,87,129, 0.4) 0px 5px, rgba(242,87,129, 0.3) 0px 10px, rgba(242,87,129, 0.2) 0px 15px, rgba(242,87,129, 0.1) 0px 20px, rgba(242,87,129, 0.05) 0px 25px;
 }
