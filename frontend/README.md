@@ -1,8 +1,10 @@
-# React + Vite
+# TODO List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Need to find an api where I can get card information based on the cards of each deck
+    Info I need:
+        Card description,
+        Card image/s,
+        Card mana cost
 
-Currently, two official plugins are available:
+Need to save the info above into the database and make an api route in which any time we search for a card and it is not in the database we can use the api route.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
