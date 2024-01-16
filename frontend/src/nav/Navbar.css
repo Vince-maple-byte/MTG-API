@@ -15,12 +15,18 @@
     display: flex;
     align-items: center;
     font-size: 1.5rem;
+    background-color: #1C1D25;
+}
+
+.nav--logo h4{
+    background-color: #1C1D25;
 }
 
 .nav--image {
     height: 2.5em;
     width: 2.5em;
     margin-right: 0.1em;
+    background-color: #1C1D25;
 }
 
 .nav--search{
@@ -28,20 +34,21 @@
     border-radius: 5em;
     display: flex;
     height: 1em;
-    
+    background-color: #1C1D25;
 }
 
 .nav--search input {
     border-radius: 10px;
     text-align: center;
+    background-color: white;
 }
-
 .nav--search button {
     border-radius: 10px;
     text-align: center;
     padding: 2px;
     cursor: pointer;
     transition-delay: 0.25s;
+    background-color: white;
 }
 
 .nav--search button:hover {
@@ -53,6 +60,7 @@
 .nav--format_list{
     display: flex;
     font-size: 1.5rem;
+    background-color: #1C1D25;
 }
 
 .nav--format_list a{
@@ -60,6 +68,7 @@
     color: white;
     margin-left:2em;
     transition-delay: 0.25s;
+    background-color: #1C1D25;
 }
 
 .nav--format_list a:hover{

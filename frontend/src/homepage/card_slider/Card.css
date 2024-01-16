@@ -2,23 +2,19 @@
 .card {
     text-decoration: none;
     color: white;
+    /* border: 1px solid white; */
 }
 
-.card--elements{
-    display: grid;
-    border: 1px solid white;
-    justify-content: center;
-}
 
 .card--img {
-    grid-row: 1;
     height: 25em;
     width: 25em;
+    border: 1px solid red;
 }
 
 .card--name{
     grid-area: 2 / 1 / span 2 / span 3;
-    border: 1px solid white;
     text-align: center;
     font-size: 2em;
+    border: 1px solid red;
 }

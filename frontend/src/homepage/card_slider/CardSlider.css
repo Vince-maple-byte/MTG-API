@@ -1,0 +1,23 @@
+.card--elements{
+    display: flex;
+    border: 1px solid red;
+    justify-content: center;
+    margin-top: 2em;
+    align-items: center;
+}
+
+.left--arrow {
+    border: 1px solid red;
+    fill: white;
+    height: 3em;
+    width: 3em;
+    cursor: pointer;
+}
+
+.right--arrow {
+    border: 1px solid red;
+    height: 3em;
+    width: 3em;
+    fill: white;
+    cursor: pointer;
+}

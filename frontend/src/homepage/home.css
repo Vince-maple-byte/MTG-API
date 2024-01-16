@@ -1,6 +1,4 @@
 .home {
-    background-color: #282A35;
-    border: 1px solid green;
     height: 100vh;
 }
 
@@ -8,14 +6,16 @@
     /* border: 1px solid red; */
     font-size: 2em;
     text-align: center;
-    
+    margin-top: 1em;
     /* height: 100vh; */
     color: white;
+    font-weight: 900;
 }
 
 .home--intro a{
     text-decoration: none;
     color: #F25781;
+    font-weight: 800;
 }
 
 .home--intro a:hover {
