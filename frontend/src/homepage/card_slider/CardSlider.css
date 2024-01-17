@@ -1,13 +1,13 @@
 .card--elements{
     display: flex;
-    border: 1px solid red;
+    border: 1px solid rgb(255, 170, 0);
     justify-content: center;
     margin-top: 2em;
     align-items: center;
 }
 
 .left--arrow {
-    border: 1px solid red;
+    border: 1px solid rgb(0, 119, 255);
     fill: white;
     height: 3em;
     width: 3em;
@@ -15,7 +15,7 @@
 }
 
 .right--arrow {
-    border: 1px solid red;
+    border: 1px solid rgb(0, 119, 255);
     height: 3em;
     width: 3em;
     fill: white;

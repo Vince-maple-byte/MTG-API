@@ -1,17 +1,26 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const mongooseConnection = require('./mongoose/mongoose-script.js');
+const cors = require('cors')
 const app = express();
 const port = 3000;
 
+
+app.use(cors());
 //Establish the connection with the mongodb collection
 mongooseConnection.main();
+
+
 
 //Making all of the routes
 
 app.get('/', (req, res) => {
     res.send('Select a MTG format to get data');
 })
+
+//Card information route
+const card = require('./routes/Cards/cardRoutes.js');
+app.use('/card', card)
 
 //Standard api routes
 const standard = require('./routes/Decks/standardRoutes.js');
