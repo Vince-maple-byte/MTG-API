@@ -3,19 +3,32 @@
     text-decoration: none;
     color: white;
     border: 1px solid white;
+    height: 30em;
     width: 50%;
+    
 }
 
 
 .card--img {
-    height: 25em;
+    height: 100%;
     width: 100%;
-    justify-content: center;
-    border: 1px solid rgb(242, 0, 255);
+    margin: 0;
+    
+    /* position: relative; */
+    /* border: 1px solid rgb(242, 0, 255); */
 }
 
 .card--name{
     text-align: center;
     font-size: 2em;
+
+    font-weight: bolder;
+    position: relative;
+    /* height: fit-content; */
+    bottom: 1.5em;
+    background: rgba(0, 0, 0, 0.2);
+    
+    /* background-color: white;
+    color: black; */
     /* border: 1px solid rgb(9, 255, 0); */
 }

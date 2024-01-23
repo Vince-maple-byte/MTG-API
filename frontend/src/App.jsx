@@ -2,6 +2,7 @@ import Navbar from './nav/Navbar'
 import './App.css'
 import {createBrowserRouter, Outlet, RouterProvider, useParams} from 'react-router-dom';
 import Home from './homepage/home';
+import Format from './formatpage/Format';
 
 
 function App() {
@@ -18,11 +19,11 @@ function App() {
       element: 
        <div>
          <Navbar />
-         <h1>Format</h1>
+         <Format />
        </div>,
     },
     {
-      path: '/about/',
+      path: '/about',
       element: 
        <div>
          <Navbar />

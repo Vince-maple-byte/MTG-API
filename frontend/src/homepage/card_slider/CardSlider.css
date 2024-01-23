@@ -7,7 +7,10 @@
 }
 
 .left--arrow {
-    border: 1px solid rgb(0, 119, 255);
+    /* border: 1px solid rgb(0, 119, 255); */
+    position: relative;
+    left: 4em;
+    background: rgba(0, 0, 0, 0.0);
     fill: white;
     height: 3em;
     width: 3em;
@@ -15,7 +18,10 @@
 }
 
 .right--arrow {
-    border: 1px solid rgb(0, 119, 255);
+    /* border: 1px solid rgb(0, 119, 255); */
+    position: relative;
+    right: 4em;
+    background: rgba(0, 0, 0, 0.0);
     height: 3em;
     width: 3em;
     fill: white;

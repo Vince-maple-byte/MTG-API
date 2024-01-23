@@ -1,0 +1,22 @@
+.format--card {
+    border: 1px solid white;
+    height: fit-content;
+    width: 15em;
+    padding: 1em;
+    border-radius: 0.5em;
+    color:aliceblue;
+    cursor: pointer;
+    margin-bottom: 2em;
+}
+
+.format--name {
+    font-size: 1.75rem;
+    margin-bottom: 0.25em;
+    border-bottom: 0.1em solid white;
+    text-align: center;
+}
+
+.format--desc {
+    font-size: 1.25rem;
+    text-align: center;
+}

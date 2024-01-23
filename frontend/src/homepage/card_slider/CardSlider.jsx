@@ -8,7 +8,7 @@ import axios from 'axios';
 
 export default function CardSlider(){
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [deck, setDeck] = useState([]);
+    const [deck, setDeck] = useState();
 
     useEffect(() => {
         const fetchDeckData = async() => {
@@ -22,8 +22,28 @@ export default function CardSlider(){
                         standardDeck.data[i].cards.map((x) => x.substring(2, x.length-1))
                     );
                 }
-                console.log(standardCards)
+                const finalCards = await axios.post(
+                    'http://localhost:3000/card/array/notALand',{
+                        cards: standardCards[0]
+                    }
+                    
+                )
+                console.log(finalCards)
 
+                const homePageDeck = new Array();
+
+                for(let i = 0; i < 5; i++){
+                    homePageDeck.push({
+                        name: standardDeck.data[i].deckName,
+                        img: finalCards.data[i].image_uris.art_crop
+                    })
+                }
+
+                
+                console.log(homePageDeck)
+
+                setDeck(homePageDeck)
+                resolve();
             } catch (error) {
                 console.error();
             }
@@ -31,35 +51,14 @@ export default function CardSlider(){
         fetchDeckData();
     }, []);
 
-    const cards = [
-        {
-            img:'../../../resources/lotus.png',
-            name:'Lotus Color'
-        },
-        {
-            img:'../../../resources/lotusIcon.png',
-            name:'Lotus Black/White'
-        },
-        {
-            img:'../../../resources/lotusIconTest.png',
-            name:'Lotus'
-        },
-        {
-            img:'../../../resources/lotus.png',
-            name:'Dream Lotus'
-        },
-        {
-            img:'../../../resources/lotusIcon.png',
-            name:'Bored Lotus'
-        }
-    ]
+    
 
     const onChange = (e, direction) => {
         if(direction === 'left' && currentIndex === 0){
-            setCurrentIndex(cards.length - 1);
+            setCurrentIndex(deck.length - 1);
         }else if(direction === 'left'){
             setCurrentIndex(prevIndex => prevIndex - 1);
-        }else if(direction === 'right' && currentIndex === cards.length - 1){
+        }else if(direction === 'right' && currentIndex === deck.length - 1){
             setCurrentIndex(0);
         }else{
             setCurrentIndex(prevIndex => prevIndex + 1);
@@ -67,20 +66,24 @@ export default function CardSlider(){
     } 
     return (
         <>
-            <div className="card--elements">
-                <FaCircleArrowLeft 
-                    className="left--arrow"
-                    onClick={e => onChange(e, 'left')}
-                />
-                <Card  
-                    img={cards[currentIndex].img}
-                    name={cards[currentIndex].name}
-                />
-                <FaCircleArrowRight 
-                    className="right--arrow" 
-                    onClick={e => onChange(e, 'right')}
-                />
-            </div>
+            {deck && (
+                <div className="card--elements">
+                    <FaCircleArrowLeft 
+                        className="left--arrow"
+                        onClick={e => onChange(e, 'left')}
+                    />
+                    <Card  
+                        img={deck[currentIndex].img}
+                        name={deck[currentIndex].name}
+                    />
+                    <FaCircleArrowRight 
+                        className="right--arrow" 
+                        onClick={e => onChange(e, 'right')}
+                    />
+                </div>
+                )
+            }
+            
             
         </>
     )

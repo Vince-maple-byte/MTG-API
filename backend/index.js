@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const mongooseConnection = require('./mongoose/mongoose-script.js');
 const cors = require('cors')
 const app = express();
@@ -7,9 +6,9 @@ const port = 3000;
 
 
 app.use(cors());
+app.use(express.json());
 //Establish the connection with the mongodb collection
 mongooseConnection.main();
-
 
 
 //Making all of the routes
@@ -87,5 +86,5 @@ const canadianHighlander = require('./routes/Decks/canadianHighlanderRoutes.js')
 app.use('/canadianHighlander', canadianHighlander);
 
 app.listen(port, () => {
-    console.log("Listening is port $1", [port]);
+    console.log("Listening is port ", port);
 })
