@@ -1,9 +1,25 @@
+
+.card--header {
+    text-align: center;
+    background: none;
+    color: white;
+    font-size: 2em;
+    font-weight: 900;
+}
+
 .card--elements{
+    background-image: radial-gradient(circle,
+    #f25781, #f35b7b, #f45f75, #f4636f, #f3686a, #f97161, #fd7b59, 
+   #ff8650, #ff9a40, #ffb12d, #ffc918, #f2e205
+    );
+    /* background: none; */
     display: flex;
     border: 1px solid rgb(255, 170, 0);
     justify-content: center;
     margin-top: 2em;
     align-items: center;
+    padding: 1em 0;
+    overflow: hidden;
 }
 
 .left--arrow {

@@ -3,3 +3,19 @@
     padding: 0em;
     background-color: #282A35;
 }
+
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #8f54a0 #ffffff;
+    overflow: overlay;
+  } 
+  
+*::-webkit-scrollbar {
+    width: 0.75em;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #F25781;
+    border-radius: 10px;
+    opacity: 0.25;
+}

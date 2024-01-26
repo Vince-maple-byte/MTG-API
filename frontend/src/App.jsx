@@ -3,6 +3,7 @@ import './App.css'
 import {createBrowserRouter, Outlet, RouterProvider, useParams} from 'react-router-dom';
 import Home from './homepage/home';
 import Format from './formatpage/Format';
+import FormatVersion from './formatpage/FormatVerson';
 
 
 function App() {
@@ -20,6 +21,14 @@ function App() {
        <div>
          <Navbar />
          <Format />
+       </div>,
+    },
+    {
+      path: '/format/:id',
+      element: 
+       <div>
+         <Navbar />
+         <FormatVersion />
        </div>,
     },
     {

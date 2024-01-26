@@ -1,15 +1,24 @@
 .format--card {
+    background-color: #F26F63;
+    font-weight: 700;
     border: 1px solid white;
-    height: fit-content;
+    height: 15em;
+    overflow: hidden;
     width: 15em;
     padding: 1em;
     border-radius: 0.5em;
     color:aliceblue;
     cursor: pointer;
     margin-bottom: 2em;
+    margin-left: 1em;
+}
+
+.format--card:hover{
+    overflow: scroll;
 }
 
 .format--name {
+    background: none;
     font-size: 1.75rem;
     margin-bottom: 0.25em;
     border-bottom: 0.1em solid white;
@@ -17,6 +26,14 @@
 }
 
 .format--desc {
+    background: none;
     font-size: 1.25rem;
     text-align: center;
+    padding-bottom: 1em;
+}
+
+.format--link{
+    background: none;
+    text-decoration: none;
+    cursor: pointer;
 }

@@ -2,10 +2,10 @@
 .card {
     text-decoration: none;
     color: white;
-    border: 1px solid white;
-    height: 30em;
-    width: 50%;
-    
+    border-radius: 10px;
+    height: 25em;
+    /* width: 50%; */
+    overflow: hidden;
 }
 
 

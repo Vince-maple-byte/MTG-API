@@ -21,8 +21,12 @@ export default function Navbar(){
     return (
         <div className='nav'>
             <div className='nav--logo'>
-                <img src="\resources\lotusIconTest.png" alt="" className='nav--image' />
-                <h4>MTG Mastery</h4>
+                <Link className='nav--logo--link' to={`/`}>
+                    <img src="\resources\lotusIconTest.png" alt="" className='nav--image' />
+                    <h4>MTG Mastery</h4>
+                </Link>
+                
+                
                 <form className='nav--search' onSubmit={handleSubmit}>
                     <input 
                         type="text" 
@@ -31,7 +35,9 @@ export default function Navbar(){
                         name='searchData'
                         value={search}
                     />
-                    <button>Search</button>
+                    <button>
+                        ?
+                    </button>
                 </form>
 
             </div>

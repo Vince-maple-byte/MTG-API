@@ -67,7 +67,10 @@ export default function CardSlider(){
     return (
         <>
             {deck && (
+                
                 <div className="card--elements">
+                {/* Figure a way to have this above of the slider <h1>Popular Decks</h1> */}
+                    <h1 className="card--header">Popular Decks:</h1>
                     <FaCircleArrowLeft 
                         className="left--arrow"
                         onClick={e => onChange(e, 'left')}
@@ -81,6 +84,7 @@ export default function CardSlider(){
                         onClick={e => onChange(e, 'right')}
                     />
                 </div>
+                
                 )
             }
             

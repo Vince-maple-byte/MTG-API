@@ -1,5 +1,6 @@
 .format{
-    display: grid;
-    grid-template-columns: auto auto auto auto;
+    display: flex;
     padding: 1em;
+    justify-content: center;
+    flex-wrap: wrap;
 }
