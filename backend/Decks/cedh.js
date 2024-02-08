@@ -25,10 +25,43 @@ async function start(){
         });
         return results;
     });
+
+    let deckImage = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll(
+            'div#cEDH_decks > div:nth-child(2) > div.hover_tr > div > div:nth-child(1) > img'
+            )
+        item.forEach(element => {
+            results.push(
+                mainUrl + element.getAttribute('src') //Saves the deck archetype image 
+            );
+        });
+        
+        return results;
+    });
+
+    
+
+    let deckPercentage = await page.evaluate( () => {
+        const results = [];
+        const item = document.querySelectorAll(
+            'div#cEDH_decks > div:nth-child(2) > div.hover_tr > div > div:nth-child(4)'
+            ) // Query for getting the percentage of popularity in a deck archetype
+        item.forEach(element => {
+            results.push(
+                element.textContent //Saves the percentage of popularity in a deck archetype 
+            );
+        });
+        
+        return results;
+    });
     
     for(let i = 0; i < deckArchtypes.length; i++){
         const createDeck = await new Deck({
             deckName: deckArchtypes[i].deckName,
+            deckImage: deckImage[i],
+            deckPercentage: deckPercentage[i],
             format: 'cEDH',
             formatVersion: 'AllDecks',
             url: deckArchtypes[i].url,

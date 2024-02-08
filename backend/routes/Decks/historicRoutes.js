@@ -22,6 +22,8 @@ router.route('/')
                 for(let i = 0; i < deck.length; i++){
                     const createDeck = await new Deck({
                         deckName: deck[i].deckName,
+                        deckImage: deck[i].deckImage,
+                        deckPercentage: deck[i].deckPercentage,
                         format: 'Historic',
                         formatVersion: deck[i].format,
                         url: deck[i].url,
@@ -65,11 +67,12 @@ router.route('/:historicId')
     .post((req,res) => {
         try {
             async function launch(){
-                const format = req.params.explorerFormatId;
                 const deck = await historic.historicFormat(req.params.historicId);
                 for(let i = 0; i < deck.length; i++){
                     const createDeck = await new Deck({
                         deckName: deck[i].deckName,
+                        deckImage: deck[i].deckImage,
+                        deckPercentage: deck[i].deckPercentage,
                         format: 'Historic',
                         formatVersion: deck[i].format,
                         url: deck[i].url,

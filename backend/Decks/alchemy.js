@@ -41,7 +41,6 @@ async function alchemy(){
 
     let deckPercentage = await page.evaluate( () => {
         const results = [];
-        const mainUrl = 'https://www.mtgtop8.com/';
         const item = document.querySelectorAll(
             'tr > td > div.hover_tr > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)'
             ) // Query for getting the percentage of popularity in a deck archetype

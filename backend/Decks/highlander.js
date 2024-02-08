@@ -10,7 +10,7 @@ urlMap.set('allGP', 'https://www.mtgtop8.com/format?f=HIGH&meta=116&a=');
 async function highlander(){
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto("https://www.mtgtop8.com/format?f=HIGH");
+    await page.goto("https://www.mtgtop8.com/format?f=EX");
 
     
     /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
@@ -27,6 +27,33 @@ async function highlander(){
                 deckName:  element.textContent, //Saves the deck archetype name 
                 url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
             });
+        });
+        
+        return results;
+    });
+
+    let deckImage = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('tr > td > div.hover_tr > div > div:first-child > img')
+        item.forEach(element => {
+            results.push(
+                mainUrl + element.getAttribute('src') //Saves the deck archetype image 
+            );
+        });
+        
+        return results;
+    });
+
+    let deckPercentage = await page.evaluate( () => {
+        const results = [];
+        const item = document.querySelectorAll(
+            'tr > td > div.hover_tr > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)'
+            ) // Query for getting the percentage of popularity in a deck archetype
+        item.forEach(element => {
+            results.push(
+                element.textContent //Saves the percentage of popularity in a deck archetype 
+            );
         });
         
         return results;
@@ -92,8 +119,10 @@ async function highlander(){
     let finalDeck = [];
     for(let index = 0; index < oneDeckUrl.length; index++){
         finalDeck[index] = {
-            format: 'last24months',
+            format: 'allDecks',
             deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            deckImage: deckImage[index],
+            deckPercentage: deckPercentage[index],
             url: oneDeckUrl[index], //Deck link
             cards: cards[index] // Cards
         }
@@ -111,7 +140,6 @@ async function highlanderFormat(format){
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.goto(urlMap.get(`${format}`));
-    
         
         /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
         Don't forget to add the main url to the url saved in the json data when sending it out
@@ -128,17 +156,43 @@ async function highlanderFormat(format){
                     url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
                 });
             });
+            return results;
+        });
+
+        let deckImage = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('tr > td > div.hover_tr > div > div:first-child > img')
+            item.forEach(element => {
+                results.push(
+                    mainUrl + element.getAttribute('src') //Saves the deck archetype image 
+                );
+            });
             
             return results;
         });
     
+        let deckPercentage = await page.evaluate( () => {
+            const results = [];
+            const item = document.querySelectorAll(
+                'tr > td > div.hover_tr > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)'
+                ) // Query for getting the percentage of popularity in a deck archetype
+            item.forEach(element => {
+                results.push(
+                    element.textContent //Saves the percentage of popularity in a deck archetype 
+                );
+            });
+            
+            return results;
+        });
+
         // Next step click each deckArchetype and save the first link of the deck shown
         let deckArchetypeUrl = []
         for (let index = 0; index < deckArchtypes.length; index++) {
             deckArchetypeUrl.push(deckArchtypes[index].url);
             
         }
-    
+
         //This solves the issue of getting the links to each individual deck
         //Might only do one deck for each archetype since this is kind of overkill and could problem run into issues with server timing in the future.
         let decksUrl = [];
@@ -152,7 +206,7 @@ async function highlanderFormat(format){
                 //const percent = document.querySelectorAll('div:nth-child(2) > div:nth-child(2) > div:nth-child(1)');
                 item.forEach(element => {
                     results.push(
-                         mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
+                        mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
                     );
                 });
                 return results;
@@ -169,7 +223,7 @@ async function highlanderFormat(format){
             }
             
         }
-    
+
         //Save the cards in an array with the number of each card in the deck(Complete)
         let cards = [];
         for (let i = 0; i < oneDeckUrl.length; i++) {
@@ -187,21 +241,22 @@ async function highlanderFormat(format){
                 return results;
             })
         }
-    
+
         //Final array with the deckName, deckUrl, and the cards all in one
         let finalDeck = [];
         for(let index = 0; index < oneDeckUrl.length; index++){
             finalDeck[index] = {
                 format: `${format}`,
-                deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+                deckName: deckArchtypes[index].deckName, //Saves the deck archetype name
+                deckImage: deckImage[index],
+                deckPercentage: deckPercentage[index],
                 url: oneDeckUrl[index], //Deck link
                 cards: cards[index] // Cards
             }
         }
-        
+
         await browser.close();
         return finalDeck;
     }
-    
 }
 module.exports = {highlander, highlanderFormat};

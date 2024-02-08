@@ -42,6 +42,33 @@ async function duelCommander(){
         return results;
     });
 
+    let deckImage = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('tr > td > div.hover_tr > div > div:first-child > img')
+        item.forEach(element => {
+            results.push(
+                mainUrl + element.getAttribute('src') //Saves the deck archetype image 
+            );
+        });
+        
+        return results;
+    });
+
+    let deckPercentage = await page.evaluate( () => {
+        const results = [];
+        const item = document.querySelectorAll(
+            'tr > td > div.hover_tr > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)'
+            ) // Query for getting the percentage of popularity in a deck archetype
+        item.forEach(element => {
+            results.push(
+                element.textContent //Saves the percentage of popularity in a deck archetype 
+            );
+        });
+        
+        return results;
+    });
+
     //This solves the issue of getting the links to each individual deck
     //Might only do one deck for each archetype since this is kind of overkill and could run into issues with server timing in the future.
     let decksUrl = [];
@@ -87,7 +114,9 @@ async function duelCommander(){
     for(let index = 0; index < decksUrl.length; index++){
         finalDeck[index] = {
             format: 'last3Months',
-            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            deckName: deckArchtypes[index].deckName, //Saves the deck archetype name
+            deckImage: deckImage[index], //Deck Image
+            deckPercentage: deckPercentage[index],
             url: decksUrl[index][0], //Deck link
             cards: cards[index] // Cards
         }
@@ -121,6 +150,33 @@ async function duelCommanderFormat(format){
                     url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
                 });
             });
+            return results;
+        });
+
+        let deckImage = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('tr > td > div.hover_tr > div > div:first-child > img')
+            item.forEach(element => {
+                results.push(
+                    mainUrl + element.getAttribute('src') //Saves the deck archetype image 
+                );
+            });
+            
+            return results;
+        });
+    
+        let deckPercentage = await page.evaluate( () => {
+            const results = [];
+            const item = document.querySelectorAll(
+                'tr > td > div.hover_tr > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)'
+                ) // Query for getting the percentage of popularity in a deck archetype
+            item.forEach(element => {
+                results.push(
+                    element.textContent //Saves the percentage of popularity in a deck archetype 
+                );
+            });
+            
             return results;
         });
 
@@ -185,7 +241,9 @@ async function duelCommanderFormat(format){
         for(let index = 0; index < oneDeckUrl.length; index++){
             finalDeck[index] = {
                 format: `${format}`,
-                deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+                deckName: deckArchtypes[index].deckName, //Saves the deck archetype name
+                deckImage: deckImage[index], //Deck Image
+                deckPercentage: deckPercentage[index], 
                 url: oneDeckUrl[index], //Deck link
                 cards: cards[index] // Cards
             }

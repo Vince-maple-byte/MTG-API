@@ -11,7 +11,7 @@ urlMap.set('banlistE1', 'https://www.mtgtop8.com/format?f=PEA&meta=150&a=')
 async function peasant(){
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto("https://www.mtgtop8.com/format?f=PEA&meta=205&a=");
+    await page.goto("https://www.mtgtop8.com/format?f=EX");
 
     
     /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
@@ -28,6 +28,33 @@ async function peasant(){
                 deckName:  element.textContent, //Saves the deck archetype name 
                 url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
             });
+        });
+        
+        return results;
+    });
+
+    let deckImage = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('tr > td > div.hover_tr > div > div:first-child > img')
+        item.forEach(element => {
+            results.push(
+                mainUrl + element.getAttribute('src') //Saves the deck archetype image 
+            );
+        });
+        
+        return results;
+    });
+
+    let deckPercentage = await page.evaluate( () => {
+        const results = [];
+        const item = document.querySelectorAll(
+            'tr > td > div.hover_tr > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)'
+            ) // Query for getting the percentage of popularity in a deck archetype
+        item.forEach(element => {
+            results.push(
+                element.textContent //Saves the percentage of popularity in a deck archetype 
+            );
         });
         
         return results;
@@ -93,8 +120,10 @@ async function peasant(){
     let finalDeck = [];
     for(let index = 0; index < oneDeckUrl.length; index++){
         finalDeck[index] = {
-            format: 'allPeasantDecks',
+            format: 'allDecks',
             deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            deckImage: deckImage[index],
+            deckPercentage: deckPercentage[index],
             url: oneDeckUrl[index], //Deck link
             cards: cards[index] // Cards
         }
@@ -128,6 +157,33 @@ async function peasantFormat(format){
                     url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
                 });
             });
+            return results;
+        });
+
+        let deckImage = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('tr > td > div.hover_tr > div > div:first-child > img')
+            item.forEach(element => {
+                results.push(
+                    mainUrl + element.getAttribute('src') //Saves the deck archetype image 
+                );
+            });
+            
+            return results;
+        });
+    
+        let deckPercentage = await page.evaluate( () => {
+            const results = [];
+            const item = document.querySelectorAll(
+                'tr > td > div.hover_tr > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)'
+                ) // Query for getting the percentage of popularity in a deck archetype
+            item.forEach(element => {
+                results.push(
+                    element.textContent //Saves the percentage of popularity in a deck archetype 
+                );
+            });
+            
             return results;
         });
 
@@ -192,7 +248,9 @@ async function peasantFormat(format){
         for(let index = 0; index < oneDeckUrl.length; index++){
             finalDeck[index] = {
                 format: `${format}`,
-                deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+                deckName: deckArchtypes[index].deckName, //Saves the deck archetype name
+                deckImage: deckImage[index],
+                deckPercentage: deckPercentage[index],
                 url: oneDeckUrl[index], //Deck link
                 cards: cards[index] // Cards
             }

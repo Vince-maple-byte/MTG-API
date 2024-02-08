@@ -18,6 +18,8 @@ router.route('/')
             for(let i = 0; i < deck.length; i++){
                 const createDeck = new Deck({
                     deckName: deck[i].deckName,
+                    deckImage: deck[i].deckImage,
+                    deckPercentage: deck[i].deckPercentage,
                     format: 'Standard',
                     formatVersion: deck[i].format,
                     url: deck[i].url,
@@ -54,6 +56,8 @@ router.route('/:standardFormatId')
             for(let i = 0; i < deck.length; i++){
                 const createDeck = new Deck({
                     deckName: deck[i].deckName,
+                    deckImage: deck[i].deckImage,
+                    deckPercentage: deck[i].deckPercentage,
                     format: 'Standard',
                     formatVersion: deck[i].format,
                     url: deck[i].url,

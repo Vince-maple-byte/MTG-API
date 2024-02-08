@@ -23,7 +23,8 @@ urlMap.set('allPt', "https://www.mtgtop8.com/format?f=MO&meta=92&a=")
 async function modern(){
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(urlMap.get('last2Months'));
+    await page.goto("https://www.mtgtop8.com/format?f=EX");
+
     
     /*Have to extract all of the links for each deck archtype in standard and save it in a JSON object
     Don't forget to add the main url to the url saved in the json data when sending it out
@@ -39,6 +40,33 @@ async function modern(){
                 deckName:  element.textContent, //Saves the deck archetype name 
                 url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
             });
+        });
+        
+        return results;
+    });
+
+    let deckImage = await page.evaluate( () => {
+        const results = [];
+        const mainUrl = 'https://www.mtgtop8.com/';
+        const item = document.querySelectorAll('tr > td > div.hover_tr > div > div:first-child > img')
+        item.forEach(element => {
+            results.push(
+                mainUrl + element.getAttribute('src') //Saves the deck archetype image 
+            );
+        });
+        
+        return results;
+    });
+
+    let deckPercentage = await page.evaluate( () => {
+        const results = [];
+        const item = document.querySelectorAll(
+            'tr > td > div.hover_tr > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)'
+            ) // Query for getting the percentage of popularity in a deck archetype
+        item.forEach(element => {
+            results.push(
+                element.textContent //Saves the percentage of popularity in a deck archetype 
+            );
         });
         
         return results;
@@ -104,8 +132,10 @@ async function modern(){
     let finalDeck = [];
     for(let index = 0; index < oneDeckUrl.length; index++){
         finalDeck[index] = {
-            format: 'last2Months',
+            format: 'allDecks',
             deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+            deckImage: deckImage[index],
+            deckPercentage: deckPercentage[index],
             url: oneDeckUrl[index], //Deck link
             cards: cards[index] // Cards
         }
@@ -117,7 +147,7 @@ async function modern(){
 
 async function modernFormat(format){
     if(!(urlMap.has(`${format}`))){
-        return 'Select the correct modern format to view the decks'
+        return 'Select the correct vintage format to view the decks';
     }
     else{
         const browser = await puppeteer.launch();
@@ -138,6 +168,32 @@ async function modernFormat(format){
                     deckName:  element.textContent, //Saves the deck archetype name 
                     url: mainUrl + element.getAttribute('href') //Saves the url link of the deck archetype
                 });
+            });
+            return results;
+        });
+
+        let deckImage = await page.evaluate( () => {
+            const results = [];
+            const mainUrl = 'https://www.mtgtop8.com/';
+            const item = document.querySelectorAll('tr > td > div.hover_tr > div > div:first-child > img')
+            item.forEach(element => {
+                results.push(
+                    mainUrl + element.getAttribute('src') //Saves the deck archetype image 
+                );
+            });
+            
+            return results;
+        });
+    
+        let deckPercentage = await page.evaluate( () => {
+            const results = [];
+            const item = document.querySelectorAll(
+                'tr > td > div.hover_tr > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)'
+                ) // Query for getting the percentage of popularity in a deck archetype
+            item.forEach(element => {
+                results.push(
+                    element.textContent //Saves the percentage of popularity in a deck archetype 
+                );
             });
             
             return results;
@@ -204,15 +260,16 @@ async function modernFormat(format){
         for(let index = 0; index < oneDeckUrl.length; index++){
             finalDeck[index] = {
                 format: `${format}`,
-                deckName: deckArchtypes[index].deckName, //Saves the deck archetype name 
+                deckName: deckArchtypes[index].deckName, //Saves the deck archetype name
+                deckImage: deckImage[index],
+                deckPercentage: deckPercentage[index],
                 url: oneDeckUrl[index], //Deck link
                 cards: cards[index] // Cards
             }
         }
-        
+
         await browser.close();
         return finalDeck;
     }
 }
-
 module.exports = {modern, modernFormat};

@@ -22,6 +22,8 @@ router.route('/')
                 for(let i = 0; i < deck.length; i++){
                     const createDeck = await new Deck({
                         deckName: deck[i].deckName,
+                        deckImage: deck[i].deckImage,
+                        deckPercentage: deck[i].deckPercentage,
                         format: 'Legacy',
                         formatVersion: deck[i].format,
                         url: deck[i].url,
@@ -69,6 +71,8 @@ router.route('/:legacyId')
                 for(let i = 0; i < deck.length; i++){
                     const createDeck = await new Deck({
                         deckName: deck[i].deckName,
+                        deckImage: deck[i].deckImage,
+                        deckPercentage: deck[i].deckPercentage,
                         format: 'Legacy',
                         formatVersion: deck[i].format,
                         url: deck[i].url,

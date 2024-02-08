@@ -23,6 +23,8 @@ router.route('/')
                 for(let i = 0; i < deck.length; i++){
                     const createDeck = await new Deck({
                         deckName: deck[i].deckName,
+                        deckImage: deck[i].deckImage,
+                        deckPercentage: deck[i].deckPercentage,
                         format: 'Modern',
                         formatVersion: deck[i].format,
                         url: deck[i].url,
@@ -70,6 +72,8 @@ router.route('/:modernId')
                 for(let i = 0; i < deck.length; i++){
                     const createDeck = await new Deck({
                         deckName: deck[i].deckName,
+                        deckImage: deck[i].deckImage,
+                        deckPercentage: deck[i].deckPercentage,
                         format: 'Modern',
                         formatVersion: deck[i].format,
                         url: deck[i].url,

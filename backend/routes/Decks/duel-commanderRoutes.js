@@ -17,6 +17,8 @@ router.route('/')
             for(let i = 0; i < deck.length; i++){
                 const createDeck = new Deck({
                     deckName: deck[i].deckName,
+                    deckImage: deck[i].deckImage,
+                    deckPercentage: deck[i].deckPercentage,
                     format: 'Duel Commander',
                     formatVersion: 'last3Months',
                     url: deck[i].url,
@@ -52,6 +54,8 @@ router.route('/:duelCommanderFormatId')
             for(let i = 0; i < deck.length; i++){
                 const createDeck = new Deck({
                     deckName: deck[i].deckName,
+                    deckImage: deck[i].deckImage,
+                    deckPercentage: deck[i].deckPercentage,
                     format: 'Duel Commander',
                     formatVersion: deck[i].format,
                     url: deck[i].url,

@@ -52,6 +52,8 @@ router.route('/:blockId')
             for(let i = 0; i < deck.length; i++){
                 const createDeck = new Deck({
                     deckName: deck[i].deckName,
+                    deckImage: deck[i].deckImage,
+                    deckPercentage: deck[i].deckPercentage,
                     format: 'Block',
                     formatVersion: deck[i].format,
                     url: deck[i].url,
