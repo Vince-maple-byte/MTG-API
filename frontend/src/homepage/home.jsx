@@ -19,8 +19,8 @@ export default function Home(){
             */}
             <div className="home">
                 <div className="home--intro">
-                    <p>Welcome to MTG API. We have collected the top decks in Magic The Gathering 
-                    past and present for many different <Link to={`/format`}>formats.</Link></p>  
+                    <p>Welcome to MTG Mastery! Enjoy the top decks of Magic The Gathering 
+                    past and present from many different <Link to={`/format`}>formats.</Link></p>  
                 </div>
                 <div className="home--slider">
                     <CardSlider />

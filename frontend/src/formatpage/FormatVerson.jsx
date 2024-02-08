@@ -8,9 +8,11 @@ export default function FormatVersion(props){
 
     return (
         <>
-            <h1>Format: {id}</h1>
+            <h1 className='format'>Format: {id}</h1>
+            <h1 className='meek'>JJJ</h1>
+            <h1> Crack Cocaine</h1>
             <div className="modern--table">
-
+                
             </div>
         </>
     )

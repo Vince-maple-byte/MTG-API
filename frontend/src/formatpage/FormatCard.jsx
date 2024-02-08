@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import './formatcard.css'
 
 export default function FormatCard(props){
-    console.log(props.format + ": " + props.description)
 
     return (
         <Link className="format--link" to={`/format/${props.format}`}>

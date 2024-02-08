@@ -14,7 +14,7 @@
 }
 
 .format--card:hover{
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .format--name {

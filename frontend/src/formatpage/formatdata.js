@@ -31,8 +31,8 @@ const data = [
         allowing for a more fair balanced gameplay.`
     },
     {
-        format: "CEDH",
-        description: `CEDH (Commander Elder Dragon Highlander) is a competitive version of Commander. 
+        format: "cEDH",
+        description: `cEDH (Commander Elder Dragon Highlander) is a competitive version of Commander. 
         Commander allows for a multiplayer game 
         where each player would build a 100 singleton (only one card allowed) card deck around a legendary creature called a commander.`
     },
