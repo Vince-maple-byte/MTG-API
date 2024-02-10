@@ -1,7 +1,27 @@
-.meek {
-    color: #9dfc03;
-    font-size: 140px;
-    border: 2px solid white;
-    padding: 0;
-
+.format--table {
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
+
+table {
+    border: 1px solid white;
+    border-radius: 4px;
+    height: 65vh;
+    width: 50vw;
+    color: white;
+    border-collapse: collapse;
+}
+
+th {
+    border-bottom: 1px solid white;
+    padding: 1em;
+}
+
+
+td{
+    border-bottom: 1px solid white;
+}
+
