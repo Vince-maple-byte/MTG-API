@@ -1,14 +1,13 @@
 .format--table {
     border: 1px solid red;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
 }
 
 table {
     border: 1px solid white;
-    border-radius: 4px;
     height: 65vh;
     width: 50vw;
     color: white;
@@ -16,12 +15,38 @@ table {
 }
 
 th {
-    border-bottom: 1px solid white;
+    /* border-bottom: 1px solid white; */
+    
     padding: 1em;
 }
 
 
-td{
+
+
+.cell--rows {
+    border-top: 1px solid white;
     border-bottom: 1px solid white;
+    background-color: green;
+}
+
+.format--table tbody tr:hover {
+    cursor: pointer;
+    opacity: 50%;
+}
+
+.format--pagination {
+    border: 1px dashed green;
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.format--pagination button {
+    background-color: white;
+    width: 5em;
+    height: 2em;
+    margin-right: 1em;
+    cursor: pointer;
 }
 
