@@ -192,6 +192,7 @@ export default function FormatVersion(){
                         onChange={e => {
                             table.setPageSize(Number(e.target.value))
                         }}
+                        className='pageSize'
                     >
                         {[10, 20, 30, 40, 50].map(pageSize => (
                             <option key={pageSize} value={pageSize}>
