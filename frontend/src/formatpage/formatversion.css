@@ -1,9 +1,33 @@
+
+.format--title{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+.format--titleName{
+    margin-right: 1.5em;
+}
+
+.format--version{
+    background-color: white;
+    border-radius: 5px;
+    height: 2em;
+}
+
+.format--version option {
+    background-color: white;
+}
+
 .format--table {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 1em;
 }
 
 table {
@@ -15,23 +39,25 @@ table {
 }
 
 th {
-    /* border-bottom: 1px solid white; */
-    
-    padding: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: start;
 }
-
-
 
 
 .cell--rows {
     border-top: 1px solid white;
     border-bottom: 1px solid white;
-    background-color: green;
 }
 
-.format--table tbody tr:hover {
+.cell--rows:hover td{
+    background-color: #f25781;
     cursor: pointer;
-    opacity: 50%;
+    opacity: 75%;
+}
+
+.cell--rows tbody tr {
+    background-color: white;
 }
 
 .format--pagination {
@@ -45,7 +71,7 @@ th {
 .format--pagination button {
     background-color: white;
     width: 5em;
-    height: 2em;
+    height: 3em;
     margin-right: 1em;
     cursor: pointer;
 }

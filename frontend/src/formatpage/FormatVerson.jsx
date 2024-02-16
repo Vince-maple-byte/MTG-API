@@ -39,22 +39,29 @@ const columns = [
 
 
 export default function FormatVersion(){
-    const {id} = useParams();
-    const [data, setData] = React.useState([])
-
-    
+    const {id} = useParams(); //Tells us what format this is
+    const [data, setData] = React.useState([]) //We keep all of the versions of the format here
+    const [deck, setDeck] = React.useState([]) //This is the deck that is going to be displayed based on the option selection
+    const [formatVersion, setFormatVersion] = React.useState([]); //Keeps track of the different format versions
+    // console.log(deck)
     const table = useReactTable({
-        data,
         columns,
+        data: deck,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         debugTable: true,
       });
 
+    //This gives us the specific version of the format based on what string value is passed to the function
+    const version = (data, versionName) => {
+        return data.filter(deck => deck.formatVersion === versionName)
+    }
+
     React.useEffect(() => {
         const fetchData = async() => {
             try {
-                console.log(id.toLowerCase())
+                //We make an api call for all of the decks in the format
+                console.log('useEffect')
                 let response = '';
                 if(id.toLocaleLowerCase() === 'duel commander'){
                     response = await axios.get(`http://localhost:3000/duel-commander`);
@@ -66,8 +73,12 @@ export default function FormatVersion(){
                     response = await axios.get(`http://localhost:3000/${id.toLowerCase()}`);
                 }
                 
-                console.log(response.data)
+                //Save the api call data here
                 setData(response.data);
+                setDeck(version(response.data, response.data[0].formatVersion))
+                setFormatVersion(optionPane(response.data))
+                console.log(response.data)
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -75,10 +86,33 @@ export default function FormatVersion(){
         fetchData();
     }, [])
 
+    const optionPane = (deckList) => {
+        const option = new Set();
+        for(let i = 0; i < deckList.length; i++){
+            if(!option.has(deckList[i].formatVersion)){
+                option.add(deckList[i].formatVersion);
+            }
+        }
+        return Array.from(option);
+    }
+
     return (
         <>
-            <h1 className='format'>Format: {id}</h1>
+            
+            
             <div className='format--table'>
+                <div className="format--title">
+                    <h1 className='format--titleName'>Format: {id}</h1>
+                    <select 
+                        className='format--version'
+                        onChange={e => setDeck(version(data, e.target.value))}>
+                        {formatVersion.map(version => (
+                            <option key={version} value={version}>
+                                {version}
+                            </option>
+                        ))}
+                    </select>
+                </div>
                 <table>
                     <thead>
                         {table.getHeaderGroups().map(headerGroup => (
@@ -99,10 +133,17 @@ export default function FormatVersion(){
                     <tbody>
                         {table.getRowModel().rows.map(row => (
                             <tr 
-                                key={row.id} 
+                                key={row.id}
+                                className='cell--rows'
+                                onMouseEnter={
+                                    () => row.id && table.setRowState(row.id, {isHovered: true})
+                                } 
+                                onMouseLeave={() => {
+                                    row.id && table.setRowState(row.id, { isHovered: false });
+                                }}
                             >
                                 {row.getVisibleCells().map(cell => (
-                                    <td key={cell.id} className='cell--rows'>
+                                    <td key={cell.id} >
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>     
                                 ))}
