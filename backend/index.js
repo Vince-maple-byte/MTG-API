@@ -21,6 +21,10 @@ app.get('/', (req, res) => {
 const card = require('./routes/Cards/cardRoutes.js');
 app.use('/card', card)
 
+//Select a specific deck
+const deck = require('./routes/Decks/deckRoutes.js');
+app.use('/deck', deck);
+
 //Standard api routes
 const standard = require('./routes/Decks/standardRoutes.js');
 app.use('/standard', standard);

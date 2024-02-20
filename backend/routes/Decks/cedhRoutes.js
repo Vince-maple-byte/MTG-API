@@ -5,7 +5,7 @@ const Deck = require('../../mongoose/database.js')
 
 router.get('/', (req, res) => {
     async function launch(){
-        const deck = await cedh.start();
+        const deck = await Deck.find({format: 'cEDH'})
         res.send(deck);
     }
     launch();
