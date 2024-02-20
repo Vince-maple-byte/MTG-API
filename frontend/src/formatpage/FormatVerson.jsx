@@ -1,7 +1,6 @@
 import React from 'react';
 import './formatversion.css';
-import {Link, useParams} from 'react-router-dom';
-import tableData from './tables/tabledata.js';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import {
     createColumnHelper,
@@ -43,6 +42,7 @@ export default function FormatVersion(){
     const [data, setData] = React.useState([]) //We keep all of the versions of the format here
     const [deck, setDeck] = React.useState([]) //This is the deck that is going to be displayed based on the option selection
     const [formatVersion, setFormatVersion] = React.useState([]); //Keeps track of the different format versions
+    const navigate = useNavigate();
     // console.log(deck)
     const table = useReactTable({
         columns,
@@ -61,7 +61,6 @@ export default function FormatVersion(){
         const fetchData = async() => {
             try {
                 //We make an api call for all of the decks in the format
-                console.log('useEffect')
                 let response = '';
                 if(id.toLocaleLowerCase() === 'duel commander'){
                     response = await axios.get(`http://localhost:3000/duel-commander`);
@@ -77,7 +76,6 @@ export default function FormatVersion(){
                 setData(response.data);
                 setDeck(version(response.data, response.data[0].formatVersion))
                 setFormatVersion(optionPane(response.data))
-                console.log(response.data)
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -135,12 +133,15 @@ export default function FormatVersion(){
                             <tr 
                                 key={row.id}
                                 className='cell--rows'
-                                onMouseEnter={
-                                    () => row.id && table.setRowState(row.id, {isHovered: true})
-                                } 
-                                onMouseLeave={() => {
-                                    row.id && table.setRowState(row.id, { isHovered: false });
+                                onClick={() => {
+                                    const deckName = row.original.deckName;
+                                    const format = row.original.format;
+                                    const formatVersion = row.original.formatVersion;
+
+                                    const destination = `/deck?deckName=${encodeURIComponent(deckName)}&format=${encodeURIComponent(format)}&formatVersion=${encodeURIComponent(formatVersion)}`
+                                    navigate(destination);
                                 }}
+                                
                             >
                                 {row.getVisibleCells().map(cell => (
                                     <td key={cell.id} >

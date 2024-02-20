@@ -4,6 +4,7 @@ import {createBrowserRouter, Outlet, RouterProvider, useParams} from 'react-rout
 import Home from './homepage/home';
 import Format from './formatpage/Format';
 import FormatVersion from './formatpage/FormatVerson';
+import Deck from './Deck/Deck'
 
 
 function App() {
@@ -29,6 +30,14 @@ function App() {
        <div>
          <Navbar />
          <FormatVersion />
+       </div>,
+    },
+    {
+      path: '/deck',
+      element: 
+       <div>
+         <Navbar />
+         <Deck />
        </div>,
     },
     {
