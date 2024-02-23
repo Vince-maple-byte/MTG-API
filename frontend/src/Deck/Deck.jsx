@@ -23,7 +23,6 @@ export default function Deck(){
               };
               const response = await axios.request(config);
               setDeck(response.data[0]);
-              console.log(deck);
             } catch (error) {
               console.error('Error fetching data:', error);
             }
@@ -33,14 +32,67 @@ export default function Deck(){
           fetchData();
       
     }, [])
+
+    const cardMap = (cards) => {
+      const sectionLength = Math.ceil(cards.length / 3);
+      let section = new Array(3);
+      for(let i = 0; i < section.length; i++){
+        section[i] = new Array();
+      }
+      for(let i = 0; i < cards.length; i++){
+        if(i < sectionLength){
+          section[0].push(
+            <h1>{cards[i]}</h1>
+          )
+        }
+        else if(i < sectionLength * 2){
+          section[1].push(
+            <h1>{cards[i]}</h1>
+          )
+        }
+        else{
+          section[2].push(
+            <h1>{cards[i]}</h1>
+          )
+        }
+      }
+      console.log(cards.length);
+
+      console.log(cards)
+      return section;
+    }
     return (
         <>
-            <h1>{deck && deck.deckName}</h1>
-            <h1>{deck && deck.format}</h1>
-            <h1>{deck && deck.formatVersion}</h1>
-            {deck && deck.cards.map((card,index) => (
-                <h1 key={index}>{card}</h1>
-            ))}
+
+          <div className="deck">
+            <div className="deck--intro">
+              <div className="deck--name">
+                <h1>Deck: {deck && deck.deckName}</h1>
+              </div>
+              <div className="deck--format">
+                <h1>Format: {deck && deck.format}</h1>
+              </div>
+              <div className="deck--formatVersion">
+                <h1>Version: {deck && deck.formatVersion}</h1>
+              </div>
+            </div>
+            
+            <div className="deck--cards">
+              <div className="deck--section">
+                {deck && cardMap(deck.cards)[0]}
+              </div>
+              <div className="deck--section">
+                {deck && cardMap(deck.cards)[1]}
+              </div>
+              <div className="deck--section">
+                {deck && cardMap(deck.cards)[2]}
+              </div>
+            </div>
+          </div>
+            
+            
+            
+            
         </>
     )
 }
