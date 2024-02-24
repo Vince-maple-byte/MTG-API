@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import {useLocation} from 'react-router-dom'
+import {useLocation, Link} from 'react-router-dom'
 import axios from 'axios'
 import './deck.css'
 
@@ -8,6 +8,7 @@ export default function Deck(){
     const [deck, setDeck] = useState();
     const {search} = useLocation()
     const deckInfo = Object.fromEntries([...new URLSearchParams(search)])
+    console.log(deckInfo)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,23 +43,20 @@ export default function Deck(){
       for(let i = 0; i < cards.length; i++){
         if(i < sectionLength){
           section[0].push(
-            <h1>{cards[i]}</h1>
+            <Link key={i}>{cards[i]}</Link>
           )
         }
         else if(i < sectionLength * 2){
           section[1].push(
-            <h1>{cards[i]}</h1>
+            <Link key={i}>{cards[i]}</Link>
           )
         }
         else{
           section[2].push(
-            <h1>{cards[i]}</h1>
+            <Link key={i}>{cards[i]}</Link>
           )
         }
       }
-      console.log(cards.length);
-
-      console.log(cards)
       return section;
     }
     return (
@@ -67,14 +65,18 @@ export default function Deck(){
           <div className="deck">
             <div className="deck--intro">
               <div className="deck--name">
+                <img src={deck && deck.deckImage}  />
                 <h1>Deck: {deck && deck.deckName}</h1>
               </div>
               <div className="deck--format">
-                <h1>Format: {deck && deck.format}</h1>
+                <Link to={`/format/${deckInfo.format}`}>Format: {deck && deck.format}</Link>
+
+                <div className="deck--formatVersion">
+                  Version: {deck && deck.formatVersion}
+                </div>
+                
               </div>
-              <div className="deck--formatVersion">
-                <h1>Version: {deck && deck.formatVersion}</h1>
-              </div>
+              
             </div>
             
             <div className="deck--cards">

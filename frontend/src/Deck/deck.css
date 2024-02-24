@@ -4,21 +4,70 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100vw;
+    justify-content: center; 
+}
+
+.deck--name {
+    display: flex;
+    margin-bottom: 1em;
 }
 
 .deck--intro{
-    border: 1px solid red;
     margin: 1em;
 }
 
 .deck--cards{
-    border: 1px solid green;
     display: flex;
-    justify-content: space-between;
+}
+
+.deck--format{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.deck--format a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.25em;
+    border: 1px solid #F26F63;
+    background-color: #F26F63;
+    opacity: 0.8;
+    padding: 0.10em;
+    border-radius: 1em;
+}
+
+.deck--format a:hover{
+    opacity: 1;
+}
+
+.deck--formatVersion{
+    margin-left: 0.5em;
+    color: white;
+    font-size: 1.25em;
+    border: 1px solid #F26F63;
+    background-color: #F26F63;
+    opacity: 0.8;
+    padding: 0.10em;
+    border-radius: 1em;
 }
 
 .deck--section{
     margin: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.deck--section a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5em;
+    /* border: 1px solid green; */
+    padding: 0.5em;
+}
+
+.deck--section a:hover{
+    border: 1px solid white;
+    background-color: #F25781;
+    opacity: 75%;
 }
