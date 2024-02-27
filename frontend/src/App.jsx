@@ -5,6 +5,7 @@ import Home from './homepage/home';
 import Format from './formatpage/Format';
 import FormatVersion from './formatpage/FormatVerson';
 import Deck from './Deck/Deck'
+import Card from './Card/Card';
 
 
 function App() {
@@ -38,6 +39,14 @@ function App() {
        <div>
          <Navbar />
          <Deck />
+       </div>,
+    },
+    {
+      path: '/card',
+      element: 
+       <div>
+         <Navbar />
+         <Card />
        </div>,
     },
     {

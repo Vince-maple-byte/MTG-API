@@ -1,0 +1,26 @@
+.card{
+    font-size: larger;
+    border: 1px solid red;
+    overflow: auto;
+}
+
+.card--content{
+    display:flex;
+    border: 1px dashed aliceblue;
+}
+
+.card--information{
+    font-size: x-large;
+    border: 1px solid goldenrod;
+}
+
+.card--prices{
+    display: flex;
+    margin-bottom: 0.1em;
+    border: 1px solid saddlebrown;
+}
+
+#cardImg {
+    height: 20em;
+    margin-right: 4em;
+}

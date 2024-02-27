@@ -8,7 +8,6 @@ export default function Deck(){
     const [deck, setDeck] = useState();
     const {search} = useLocation()
     const deckInfo = Object.fromEntries([...new URLSearchParams(search)])
-    console.log(deckInfo)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -43,17 +42,17 @@ export default function Deck(){
       for(let i = 0; i < cards.length; i++){
         if(i < sectionLength){
           section[0].push(
-            <Link key={i}>{cards[i]}</Link>
+            <Link key={i} to={`/card?card=${String(cards[i]).substring(2)}`}>{cards[i]}</Link>
           )
         }
         else if(i < sectionLength * 2){
           section[1].push(
-            <Link key={i}>{cards[i]}</Link>
+            <Link key={i} to={`/card?card=${String(cards[i]).substring(2)}`}>{cards[i]}</Link>
           )
         }
         else{
           section[2].push(
-            <Link key={i}>{cards[i]}</Link>
+            <Link key={i} to={`/card?card=${String(cards[i]).substring(2)}`}>{cards[i]}</Link>
           )
         }
       }
