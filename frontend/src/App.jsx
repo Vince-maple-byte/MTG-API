@@ -5,7 +5,7 @@ import Home from './homepage/home';
 import Format from './formatpage/Format';
 import FormatVersion from './formatpage/FormatVerson';
 import Deck from './Deck/Deck'
-import Card from './Card/Card';
+import CardInfo from './Card/CardInfo';
 
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
       element: 
        <div>
          <Navbar />
-         <Card />
+         <CardInfo />
        </div>,
     },
     {

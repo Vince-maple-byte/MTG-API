@@ -1,0 +1,99 @@
+.card{
+    font-size: larger;
+    color: white;
+    border: 1px solid red;
+    overflow: auto;
+}
+#cardImg {
+    height: 20em;
+    margin-right: 4em;
+}
+.card--content{
+    display:flex;
+    border: 1px dashed aliceblue;
+}
+
+.card--information{
+    font-size: x-large;
+    border: 1px solid goldenrod;
+}
+
+.card--prices{
+    display: flex;
+    margin-bottom: 0.1em;
+    width: fit-content;
+}
+
+.card--prices div{
+    margin-right: 0.5em;
+}
+
+.card--manacost{
+    display: flex;
+    margin-bottom: 0.1em;
+    width: fit-content;
+}
+
+.card--legal{
+    margin-bottom: 0.1em;
+}
+
+.card--rarity{
+    display: flex;
+    margin-bottom: 0.1em;
+    align-items: center;
+}
+
+.card--rarity .common{
+    margin-left: 0.5em;
+    color: black;
+    border: 1px solid;
+    border-color: lightslategray;
+    background-color: lightslategray;
+    opacity: 0.7;
+    border-radius: 4px;
+    padding: 1px;
+}
+
+.card--rarity .uncommon{
+    margin-left: 0.5em;
+    color: black;
+    border: 1px solid;
+    border-color: steelblue;
+    background-color: steelblue;
+    opacity: 0.7;
+    border-radius: 4px;
+    padding: 1px;
+}
+
+.card--rarity .rare{
+    margin-left: 0.5em;
+    color: black;
+    border: 1px solid;
+    border-color: rgba(255, 217, 0);
+    background-color: rgba(255, 217, 0);
+    opacity: 0.7;
+    border-radius: 4px;
+    padding: 1px;
+}
+
+.card--rarity .mystic{
+    margin-left: 0.5em;
+    color: black;
+    border: 1px solid;
+    border-color: #FF5349;
+    background-color: #FF5349;
+    opacity: 0.7;
+    border-radius: 4px;
+    padding: 1px;
+}
+
+.card--setname{
+    display: flex;
+    margin-bottom: 0.1em;
+    width: fit-content;
+}
+
+.card--setname div{
+    margin-left: 0.5em;
+}
