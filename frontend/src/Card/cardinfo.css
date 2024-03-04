@@ -36,6 +36,9 @@
 
 .card--legal{
     margin-bottom: 0.1em;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .card--rarity{
@@ -96,4 +99,12 @@
 
 .card--setname div{
     margin-left: 0.5em;
+}
+
+.card--text{
+    display: flex;
+}
+
+.card--text div{
+    margin-right: 0.5em;
 }

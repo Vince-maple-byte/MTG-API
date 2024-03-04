@@ -5,7 +5,10 @@ const Card = require('../../mongoose/cardDatabase');
 router.route('/:cardId')
     .get(async (req, res) => {
         try {
-            const deck = await Card.find({name: { "$regex": `${req.params.cardId}`}})
+            let deck = await Card.find({name: `${req.params.cardId}`})
+            if(deck === undefined || deck.length == 0){
+                deck = await Card.find({name: {"$regex": `${req.params.cardId}`}})
+            }
             res.status(201).send(deck);
         } catch (error) {
             console.errror(error);

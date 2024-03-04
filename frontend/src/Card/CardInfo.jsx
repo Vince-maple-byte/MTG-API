@@ -46,6 +46,7 @@ export default function Card(){
         }
     } 
 
+    //Makes an object that returns the rarity of the card. Color is to determine what class name to use and Name is the text.
     const rarity = () => {
         if(card && card.rarity && card.rarity === 'common') {
             return ({
@@ -72,6 +73,22 @@ export default function Card(){
             })
         }
     }
+
+    const legal = () => {
+        let formatLegal = new Array();
+        formatLegal.push((card && card.legalities.alchemy === 'legal') ? `✅ Alchemy` : `❌ Alchemy`);
+        formatLegal.push((card && card.legalities.duel === 'legal') ? `✅ Duel` : `❌ Duel`);
+        formatLegal.push((card && card.legalities.explorer === 'legal') ? `✅ Explorer` : `❌ Explorer`);
+        formatLegal.push((card && card.legalities.historic === 'legal') ? `✅ Historic` : `❌ Historic`);
+        formatLegal.push((card && card.legalities.legacy === 'legal') ? `✅ Legacy` : `❌ Legacy`);
+        formatLegal.push((card && card.legalities.modern === 'legal') ? `✅ Modern` : `❌ Modern`);
+        formatLegal.push((card && card.legalities.pauper === 'legal') ? `✅ Pauper` : `❌ Pauper`);
+        formatLegal.push((card && card.legalities.pioneer === 'legal') ? `✅ Pioneer` : `❌ Pioneer`);
+        formatLegal.push((card && card.legalities.standard === 'legal') ? `✅ Standard` : `❌ Standard`);
+        formatLegal.push((card && card.legalities.vintage === 'legal') ? `✅ Vintage` : `❌ Vintage`);
+
+        return formatLegal;
+    }
     return (
         <>
         {card && 
@@ -94,12 +111,12 @@ export default function Card(){
                         </div>
                         Legality:
                         <div className="card--legal">
-                            {/* Here we are going to list the formats this card is legal in*/}
+                            {legal().map((currLegal, index) => <div key={index}>{currLegal}</div>)}{/* Here we are going to list the formats this card is legal in*/}
                         </div>
                         
                         <div className="card--rarity">
                             <div>Rarity:</div>
-                            <div className={rarity().color}>{card.rarity}</div>
+                            <div className={rarity().color}>{rarity().name}</div>
                         </div>
                         
                         <div className="card--setname">
@@ -108,14 +125,14 @@ export default function Card(){
                         </div>
                         
                         <div className="card--text">
-                            Text:
+                            <div>Text:</div>
                             {oracle()} {/*The text that specifies what are the card */}
                         </div>
                         
                     </div>
-                    <div className="card--links">
+                    {/* <div className="card--links">
                         KIIN123123123123
-                    </div>
+                    </div>  */}
                 </div>
             </div>
         }
