@@ -12,7 +12,12 @@ export default function Card(){
 
     useEffect(()=>{
         const cardInfo = async(cardId)=>{
-            const response = await axios.get(`http://localhost:3000/card/${cardId.card}`)
+            cardId.card = (cardId.card.includes('/') && !cardId.card.includes('//')) ? 
+                cardId.card.slice(0, cardId.card.indexOf('/') + 1) + '/' + cardId.card.slice(cardId.card.indexOf('/') + 1) 
+                : cardId.card;
+            console.log(cardId.card)
+            const encodeCardId = encodeURIComponent(cardId.card);
+            const response = await axios.get(`http://localhost:3000/card/${encodeCardId}`)
             console.log(response.data[0])
             setCard(response.data[0])
         }
@@ -35,6 +40,10 @@ export default function Card(){
 
     //Gets the oracle text based on whether it is a flipped card or not
     const oracle = () => {
+        if(card && card.card_faces && card.card_faces[0] && card.card_faces[0].oracle_text && id.card.includes('/')){
+            return `${card.card_faces[0].name}: ${card.card_faces[0].oracle_text}
+            \n${card.card_faces[1].name}: ${card.card_faces[1].oracle_text}`
+        }
         if(card && card.card_faces && card.card_faces[0] && card.card_faces[0].oracle_text && id.card === card.card_faces[0].name){
             return `${card.card_faces[0].oracle_text}`
         }

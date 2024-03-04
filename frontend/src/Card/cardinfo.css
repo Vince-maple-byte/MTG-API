@@ -1,7 +1,6 @@
 .card{
     font-size: larger;
     color: white;
-    border: 1px solid red;
     overflow: auto;
 }
 #cardImg {
@@ -10,12 +9,10 @@
 }
 .card--content{
     display:flex;
-    border: 1px dashed aliceblue;
 }
 
 .card--information{
     font-size: x-large;
-    border: 1px solid goldenrod;
 }
 
 .card--prices{
