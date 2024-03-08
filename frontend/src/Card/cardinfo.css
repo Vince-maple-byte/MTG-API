@@ -105,3 +105,9 @@
 .card--text div{
     margin-right: 0.5em;
 }
+
+.iconImage{
+    width: 24px;
+    margin: 0;
+    padding: 0;
+}

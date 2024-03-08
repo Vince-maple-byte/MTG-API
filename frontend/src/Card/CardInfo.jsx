@@ -3,6 +3,7 @@ import { useEffect,useState } from "react";
 import {useLocation} from 'react-router-dom';
 import axios from "axios";
 import './cardinfo.css';
+import icon from './icon';
 
 export default function Card(){
     const [card, setCard] = useState();
@@ -83,6 +84,29 @@ export default function Card(){
         }
     }
 
+    //Anytime {} is seen in the string it would replace it with the img and the location in the map icon
+    const replaceManaStrings = (inputString) => {
+        const regexPattern = new RegExp(Array.from(icon.keys()).map(key => key.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')).join('|'), 'g');
+      
+        // const replacedString = inputString.replace(regexPattern, (match) => {
+        //   return `${icon.get(match)}`;
+        // });
+        console.log(inputString)
+        const i = inputString.split(new RegExp(`(${regexPattern})`));
+        console.log(i);
+
+        const images = i.map((replace,index) => {
+            if (icon.has(replace)) {
+                return <img key={index} src={`../../` + icon.get(replace)} alt={replace} className="iconImage" />;
+              } else {
+                return replace;
+              }
+            })
+      
+        return images;
+      };
+
+    //List what the legal formats of this card
     const legal = () => {
         let formatLegal = new Array();
         formatLegal.push((card && card.legalities.alchemy === 'legal') ? `✅ Alchemy` : `❌ Alchemy`);
@@ -116,7 +140,7 @@ export default function Card(){
                         
                         <div className="card--manacost">
                             Mana Cost:
-                            {card.mana_cost} {/*Have a function to convert the mana symbols to the appropiate mana symbol image*/}
+                            {replaceManaStrings(card.mana_cost)} {/*Have a function to convert the mana symbols to the appropiate mana symbol image*/}
                         </div>
                         Legality:
                         <div className="card--legal">
@@ -129,13 +153,14 @@ export default function Card(){
                         </div>
                         
                         <div className="card--setname">
-                            Set:
-                            <div>{card.set_name}</div>
+                            Set: 
+                            <div>{card.set_name} </div>
                         </div>
                         
                         <div className="card--text">
                             <div>Text:</div>
-                            {oracle()} {/*The text that specifies what are the card */}
+                            <div>{replaceManaStrings(oracle())}</div> {/*The text that specifies what are the card */}
+                            
                         </div>
                         
                     </div>
@@ -145,6 +170,8 @@ export default function Card(){
                 </div>
             </div>
         }
+
+        
         </>
     )
 }
