@@ -16,7 +16,7 @@ export default function Card(){
             cardId.card = (cardId.card.includes('/') && !cardId.card.includes('//')) ? 
                 cardId.card.slice(0, cardId.card.indexOf('/') + 1) + '/' + cardId.card.slice(cardId.card.indexOf('/') + 1) 
                 : cardId.card;
-            console.log(cardId.card)
+            // console.log(cardId.card)
             const encodeCardId = encodeURIComponent(cardId.card);
             const response = await axios.get(`http://localhost:3000/card/${encodeCardId}`)
             console.log(response.data[0])
@@ -84,6 +84,23 @@ export default function Card(){
         }
     }
 
+    //To get the text of the mana cost just in case the card is a flip card
+    const mana = () => {
+        if(card && card.card_faces && card.card_faces[0] && card.card_faces[0].mana_cost && id.card.includes('/')){
+            return `${card.card_faces[0].name}: ${card.card_faces[0].mana_cost}
+            \n${card.card_faces[1].name}: ${card.card_faces[1].mana_cost}`
+        }
+        if(card && card.card_faces && card.card_faces[0] && card.card_faces[0].mana_cost && id.card === card.card_faces[0].name){
+            return `${card.card_faces[0].mana_cost}`
+        }
+        else if(card && card.card_faces && card.card_faces[1] && card.card_faces[1].mana_cost && id.card === card.card_faces[1].name){
+            return `${card.card_faces[1].mana_cost}`
+        }
+        else {
+            return `${card.mana_cost}`
+        }
+    }
+
     //Anytime {} is seen in the string it would replace it with the img and the location in the map icon
     const replaceManaStrings = (inputString) => {
         const regexPattern = new RegExp(Array.from(icon.keys()).map(key => key.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')).join('|'), 'g');
@@ -124,9 +141,9 @@ export default function Card(){
     }
     return (
         <>
-        {card && 
+        {card ? (
             <div className="card">
-                <h1>{id.card}</h1>
+                <h1 id="card--name">{id.card}</h1>
                 <div className="card--content">
                     <img src={image()} id="cardImg"/>
                     <div className="card--information">
@@ -140,7 +157,7 @@ export default function Card(){
                         
                         <div className="card--manacost">
                             Mana Cost:
-                            {replaceManaStrings(card.mana_cost)} {/*Have a function to convert the mana symbols to the appropiate mana symbol image*/}
+                            {replaceManaStrings(mana())} {/*Have a function to convert the mana symbols to the appropiate mana symbol image*/}
                         </div>
                         Legality:
                         <div className="card--legal">
@@ -169,6 +186,12 @@ export default function Card(){
                     </div>  */}
                 </div>
             </div>
+        )
+        :
+        (
+            // If the card does not exist we are going to print this out
+            <div className="">Sorry this card {id.card} does not exist</div> 
+        )
         }
 
         

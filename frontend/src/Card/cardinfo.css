@@ -9,6 +9,12 @@
 }
 .card--content{
     display:flex;
+    justify-content: center;
+}
+
+#card--name{
+    text-align: center;
+    margin: 10px;
 }
 
 .card--information{
