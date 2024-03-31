@@ -1,21 +1,17 @@
 .home {
     height: 100vh;
-    
-    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    /* overflow: visible; */
 }
 
 .home--intro {
-    /* background-image: url('../../resources/layered-waves-haikei.png'); */
-    border: 1px solid red;
     font-size: 2em;
-    text-align: center;
-    /* height: 100vh; */
-    height: 10em;
     color: white;
     font-weight: 900;
     justify-content: center;
+    padding: 2rem;
     display: flex;
-
     background: linear-gradient(
         to right,
         #F26F63,
@@ -23,25 +19,11 @@
         #F28157
         
     );
-
-        --mask:
-          radial-gradient(1.68em at 50% 2.25em,#000 99%,#0000 101%) calc(50% - 1.5em) 0/3em 51% repeat-x,
-          radial-gradient(1.68em at 50% -1.5em,#0000 99%,#000 101%) 50% 0.75em/3em calc(51% - 0.75em) repeat-x,
-          radial-gradient(1.68em at 50% calc(100% - 2.25em),#000 99%,#0000 101%) calc(50% - 1.5em) 100%/3em 51% repeat-x,
-          radial-gradient(1.68em at 50% calc(100% + 1.50em),#0000 99%,#000 101%) 50% calc(100% - 0.75em)/3em calc(51% - 0.75em) repeat-x;
-        -webkit-mask: var(--mask);
-                mask: var(--mask);
-    
-      
 }
 
 .home--intro p{
     background: fixed;
-    overflow:hidden;
     width: 50%;
-    height: fit-content;
-    position: relative;
-    top: 4em;
     text-align: center;
 }
 

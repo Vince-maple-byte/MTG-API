@@ -27,7 +27,7 @@ export default function Navbar(){
                 </Link>
                 
                 
-                <form className='nav--search' onSubmit={handleSubmit}>
+                {/* <form className='nav--search' onSubmit={handleSubmit}>
                     <input 
                         type="text" 
                         placeholder='Search a deck'
@@ -38,7 +38,7 @@ export default function Navbar(){
                     <button>
                         ?
                     </button>
-                </form>
+                </form> */}
 
             </div>
 
